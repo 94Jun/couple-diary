@@ -1,0 +1,38 @@
+.letter_card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f4e8df;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-height: 200px;
+}
+
+.card_content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-family: 'EarlyFontDiary', sans-serif;
+}
+
+.card_content p {
+  font-size: 16px;
+}
+
+.card_footer {
+  margin-top : 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #777;
+}

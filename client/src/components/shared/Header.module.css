@@ -1,0 +1,22 @@
+.nav {
+  display: flex;
+  background-color: #eee7f4;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav ul {
+  display: flex;
+  gap : 30px;
+  padding : 15px;
+}
+
+.nav ul li a, .nav ul li p {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav ul li a:hover, .nav ul li p:hover {
+  color: #B57EDC;
+}

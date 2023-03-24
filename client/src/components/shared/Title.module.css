@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  margin: 20px;
+  color: #B57EDC;
+}
+
+.heart_icon {
+  color: #FFC0CB;
+  display: flex;
+  align-items: center;
+}
