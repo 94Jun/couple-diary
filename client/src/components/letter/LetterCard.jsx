@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 const LetterCard = ({ letter, openLetterView, getLettersByCoupleId }) => {
   const timestamp = formatDate(new Date(letter.created_at));
   const userInfo = useSelector((state) => state.login.userInfo);
-  const { letter_readers } = letter;
-  const view = letter_readers && letter_readers.find((reader) => reader?.user_id === userInfo.user_id);
+  const { readers } = letter;
+  const view = readers && readers.find((reader) => reader?.user_id === userInfo.user_id);
 
   let contentPreview = letter.content.slice(0, 100);
 
@@ -43,7 +43,7 @@ const LetterCard = ({ letter, openLetterView, getLettersByCoupleId }) => {
         </p>
       </div>
       <div className={styles.card_footer}>
-        <p className={styles.nickname}>{letter.user_nickname}</p>
+        <p className={styles.nickname}>{letter.nickname}</p>
         <p>{view ? "읽음" : "읽지 않음"}</p>
         <p className={styles.timestamp}>{timestamp}</p>
       </div>

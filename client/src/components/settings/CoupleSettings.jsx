@@ -1,4 +1,4 @@
-import MainButton from "../shared/MainButton";
+import MainButton from "../shared/button/MainButton";
 import styles from "./CoupleSettings.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import useLoginMaintenance from "../../hooks/useLoginMaintenance";
 const CoupleSettings = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const loginMaintenance = useLoginMaintenance();
-  console.log(userInfo)
+
   /** 커플 연결 해제 : couples 테이블 DELETE 및 users 테이블 PUT */
   const disconnectCouple = async () => {
     const config = {

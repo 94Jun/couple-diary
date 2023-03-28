@@ -1,5 +1,4 @@
 const { requestGetSign, requestDeleteSignByUserId, requestDeleteSignByCoupleCode, requestPostCouple, requestPostSign } = require("./requestCouple");
-
 const { requestUserUpdate } = require("../userController/requestUser");
 
 /** 커플 등록 시 실행되는 함수

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import MainButton from "../shared/MainButton";
+import MainButton from "../shared/button/MainButton";
 import styles from "./CoupleRegister.module.css";
-import CancelButton from "../shared/CancelButton";
+import CancelButton from "../shared/button/CancelButton";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
 
 const CoupleRegister = ({ toggleCoupleRegisterModal }) => {

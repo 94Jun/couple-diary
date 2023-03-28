@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CoupleRegister from "../components/couple/CoupleRegister";
 import Backdrop from "../components/shared/Backdrop";
-import MainButton from "../components/shared/MainButton";
+import MainButton from "../components/shared/button/MainButton";
 import ModalContainer from "../components/shared/ModalContainer";
 import useToggle from "../hooks/useToggle";
 import styles from "./HomePage.module.css";

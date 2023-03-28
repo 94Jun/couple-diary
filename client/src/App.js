@@ -10,7 +10,8 @@ import LetterPage from "./pages/LetterPage";
 import MemoryPage from "./pages/MemoryPage";
 import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
-import WriteLetterPage from "./pages/WriteLetterPage";
+import AddLetterPage from "./pages/AddLetterPage";
+import AddMemoryPage from "./pages/AddMemoryPage";
 import useLoginMaintenance from "./hooks/useLoginMaintenance";
 import { useEffect } from "react";
 
@@ -30,8 +31,9 @@ function App() {
         <Route path="/anniversary" element={<AnniversaryPage />} />
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/letter" element={<LetterPage />} />
-        <Route path="/letter/write" element={<WriteLetterPage />} />
+        <Route path="/letter/add" element={<AddLetterPage />} />
         <Route path="/memory" element={<MemoryPage />} />
+        <Route path="/memory/add" element={<AddMemoryPage />} />
         <Route path="/*" element={<Navigate to="/"></Navigate>} />
       </Routes>
       <Footer />

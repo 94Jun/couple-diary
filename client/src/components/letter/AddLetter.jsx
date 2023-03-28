@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./WriteLetter.module.css";
+import styles from "./AddLetter.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const WriteLetter = () => {
+const AddLetter = () => {
   const navigate = useNavigate();
   const userInfo = useSelector((state) => state.login.userInfo);
   const [content, setContent] = useState("");
@@ -55,4 +55,4 @@ const WriteLetter = () => {
   );
 };
 
-export default WriteLetter;
+export default AddLetter;

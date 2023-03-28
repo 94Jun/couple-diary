@@ -25,7 +25,7 @@ const LetterList = () => {
     }
   };
 
-
+  
   /** selectedLetter 설정 */
   const openLetterView = (letter) => {
     setSelectedLetter(letter);

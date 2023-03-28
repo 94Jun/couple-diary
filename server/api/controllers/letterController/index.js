@@ -11,33 +11,16 @@ const getLettersByCoupleId = (req, res) => {
     }
     const { couple_id } = req.params;
     const sql = `
-    SELECT
-    l.*,
-    u.nickname as user_nickname,
-    COALESCE(
-        JSON_ARRAYAGG(
-            CASE
-                WHEN lr.read_id IS NOT NULL THEN JSON_OBJECT(
-                    'read_id', lr.read_id,
-                    'user_id', lr.user_id
-                )
-                ELSE NULL
-            END
-        ),
-        '[]'
-    ) as letter_readers
-    FROM
-        letters l
-    JOIN
-        users u ON l.user_id = u.user_id
-    LEFT JOIN
-        letter_readers lr ON l.letter_id = lr.letter_id
-    WHERE
-        l.couple_id = ?
-    GROUP BY
-        l.letter_id, u.nickname
-    ORDER BY
-        l.created_at DESC;
+    SELECT l.*, r.readers, u.nickname
+    FROM letters l
+    LEFT JOIN (
+      SELECT letter_id, JSON_ARRAYAGG(JSON_OBJECT('read_id', read_id, 'user_id', user_id, 'read_at', read_at)) as readers
+        FROM letter_readers
+        GROUP BY letter_id
+    )r ON l.letter_id = r.letter_id
+    LEFT JOIN users u ON l.user_id = u.user_id
+    WHERE couple_id = ?
+    ORDER BY created_at DESC;
     `;
     const params = [couple_id];
     conn.query(sql, params, (err, rows, fields) => {
@@ -45,9 +28,6 @@ const getLettersByCoupleId = (req, res) => {
         console.error("Query error", err);
         res.status(500).json({ message: "편지 목록을 불러오는데 실패했습니다." });
       } else {
-        for (let i = 0; i < rows.length; i++) {
-          rows[i].letter_readers = JSON.parse(rows[i].letter_readers);
-        }
         res.status(200).json(rows);
       }
     });
