@@ -1,6 +1,6 @@
 import { useState } from "react";
 const useToggle = (initial) => {
-  const [data, setData] = useState(initial);
+  const [data, setData] = useState(initial || false);
   const toggleData = () => {
     setData((prev) => !prev);
   };

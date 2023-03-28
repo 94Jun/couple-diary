@@ -4,10 +4,25 @@ import styles from "./Header.module.css";
 import { useSelector } from "react-redux";
 import useToggle from "../../hooks/useToggle";
 import Login from "../login/Login";
+import { useEffect, useState } from "react";
 const Header = () => {
   const isLogin = useSelector((state) => state.login.isLogin);
   const [loginModal, toggleLoginModal] = useToggle(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    if (isLogin !== null) {
+      setIsLoading(false);
+    }
+  }, [isLogin]);
+
+  let content;
+  if (!isLoading && isLogin === true) {
+    content = <Link to="/mypage">설정</Link>;
+  }
+  if (!isLoading && isLogin === false) {
+    content = <p onClick={toggleLoginModal}>로그인</p>;
+  }
   return (
     <header className={styles.header}>
       <Title />
@@ -25,7 +40,7 @@ const Header = () => {
           <li>
             <Link to="/letter">편지</Link>
           </li>
-          <li>{isLogin ? <Link to="/mypage">설정</Link> : <p onClick={toggleLoginModal}>로그인</p>}</li>
+          <li>{content}</li>
         </ul>
       </nav>
       {loginModal && <Login toggleLoginModal={toggleLoginModal} />}

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { kakaoLogin, getTokenValidation } = require("../controllers/authController");
+const { kakaoLogin, checkLogin, kakaoLogout } = require("../controllers/authController");
 
 router.get("/kakao/callback/login", kakaoLogin);
-router.get("/token/validation", getTokenValidation);
+router.get("/kakao/callback/logout", kakaoLogout)
+router.get("/login/maintenance", checkLogin);
 
 module.exports = router;

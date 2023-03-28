@@ -11,8 +11,14 @@ import MemoryPage from "./pages/MemoryPage";
 import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
 import WriteLetterPage from "./pages/WriteLetterPage";
+import useLoginMaintenance from "./hooks/useLoginMaintenance";
+import { useEffect } from "react";
 
 function App() {
+  const loginMaintenance = useLoginMaintenance();
+  useEffect(() => {
+    loginMaintenance();
+  }, []);
   return (
     <div className="App">
       <Header />

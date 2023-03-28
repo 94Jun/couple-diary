@@ -11,6 +11,10 @@
   padding : 15px;
 }
 
+.nav ul li{
+  min-width : 30px;
+}
+
 .nav ul li a, .nav ul li p {
   display: inline-block;
   color: #333;
