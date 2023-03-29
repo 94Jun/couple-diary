@@ -24,7 +24,7 @@ const Memories = () => {
   }, [userInfo]);
 
   return (
-    <div className={styles.contianer}>
+    <div className={styles.container}>
       {memories &&
         memories.length > 0 &&
         memories.map((memory) => {

@@ -1,5 +1,4 @@
 const pool = require("../../../config/db");
-const axios = require("axios");
 const { postMemoryByAdd } = require("./postMemoryByAdd");
 
 /** memories 테이블 POST */

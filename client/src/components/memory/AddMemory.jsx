@@ -45,7 +45,7 @@ const AddMemory = () => {
 
   /** # 입력을 통한 태그 등록(배열 형태) 및 공백 제거  */
   const handleTagsChange = (e) => {
-    const tags = e.target.value
+    const tagList = e.target.value
       .split("#")
       .filter((tag, idx) => {
         return idx !== 0 && tag.trim().length > 0;
@@ -53,23 +53,34 @@ const AddMemory = () => {
       .map((tag) => {
         return tag.replace(/\s+/g, "");
       });
-    setTags(tags);
+    setTags(tagList);
   };
 
-  /** memories 테이블 POST 요청 */
   const postMemoryByAdd = async (data) => {
+    const formData = new FormData();
+    for (const key in data) {
+      if (key !== "photos" && key !== "tags") {
+        formData.append(key, data[key]);
+      }
+    }
+    for (let i = 0; i < data.photos.length; i++) {
+      formData.append(`photos`, data.photos[i]);
+    }
+    for (let i = 0; i < data.tags.length; i++) {
+      formData.append("tags", data.tags[i]);
+    }
     const config = {
-      url: `/api/memory/add`,
+      url: "/api/memory/add",
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      data,
+      headers: { "Content-Type": "multipart/form-data" },
+      data: formData,
     };
     await axios(config);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(validation){
+    if (validation) {
       const data = {
         couple_id: userInfo.couple_id,
         user_id: userInfo.user_id,
@@ -87,7 +98,7 @@ const AddMemory = () => {
       setTags([]);
       navigate("/memory");
     } else {
-      alert("본문이나 사진을 등록해주세요.")
+      alert("본문이나 사진을 등록해주세요.");
     }
   };
 

@@ -13,6 +13,7 @@ const memoryRouter = require("./api/routes/memoryRoutes");
 const app = express();
 dotenv.config();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
 app.use(cookieEncrypter(process.env.COOKIE_SECRET_KEY));
