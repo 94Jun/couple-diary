@@ -11,7 +11,7 @@ const getUserByKakaoId = (req, res) => {
     const { kakao_id } = req.params;
     const sql = `
     SELECT 
-    u.*, c.couple_id,
+    u.*, c.couple_id, c.profile_url,
     CASE 
         WHEN c.couple_id IS NOT NULL THEN
             JSON_OBJECT(

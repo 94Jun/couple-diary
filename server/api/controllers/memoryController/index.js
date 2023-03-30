@@ -80,9 +80,8 @@ const postMemoryTag = (req, res) => {
 };
 
 /** memories 테이블 최신 순 GET */
-const getMemoriesByCoupleId = (req, res) => {
-  const { sort } = req.query;
-  const { couple_id } = req.params;
+const getMemoriesById = (req, res) => {
+  const { sort, type, id } = req.query;
   pool.getConnection((err, conn) => {
     if (err) {
       console.error("Connection error", err);
@@ -108,10 +107,10 @@ const getMemoriesByCoupleId = (req, res) => {
       JOIN users u ON mc.user_id = u.user_id
       GROUP BY mc.memory_id
     ) c ON m.memory_id = c.memory_id
-    WHERE couple_id = ?
+    WHERE ${type === "memory" ? "m.memory" : type}_id = ?
     ORDER BY m.memory_date DESC;
     `;
-    const params = [couple_id];
+    const params = [id];
     conn.query(sql, params, (err, rows, fields) => {
       if (err) {
         console.error("Query Error", err);
@@ -124,4 +123,4 @@ const getMemoriesByCoupleId = (req, res) => {
   });
 };
 
-module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesByCoupleId };
+module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById };

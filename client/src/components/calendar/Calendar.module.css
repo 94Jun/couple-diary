@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.header_title{
+  display: flex;
+  align-items: center;
+  gap : 10px;
+}
+.header_title h3 {
+  font-size: 22px;
+}
+.header_title img {
+  width : 40px;
+  height: 60px;
+}
+.btn_wrap {
+  display: flex;
+  gap: 10px;
+}
+.btn_wrap span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_wrap button {
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+
+.table {
+  border: 1px #a39485 solid;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.day_tr {
+  height: 40px;
+}
+.date_tr {
+  height: 70px;
+}
+
+.td {
+  border-top: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  vertical-align: top;
+  padding: 10px;
+}
+.date_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.date {
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+
+.else_month {
+  color: #aaa;
+}
+.weekend {
+  color: red;
+}
+.selected {
+  outline: 1px solid dodgerblue;
+  outline-offset: -2px;
+}
+
+.schedule {
+  font-size: 10px;
+  color: green;
+}
+.schedule_wrap{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top : 10px;
+}

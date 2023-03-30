@@ -10,7 +10,7 @@ const LetterList = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [letters, setLetters] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState(null);
-
+  
   /** letters 테이블에서 couple_id에 해당하는 튜플 GET */
   const getLettersByCoupleId = async (couple_id) => {
     const config = {

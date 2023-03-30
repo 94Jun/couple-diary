@@ -106,11 +106,12 @@ const postCouple = (req, res) => {
       res.status(500).json({ message: "서버 에러입니다." });
       return;
     }
+    const profile_url = `${process.env.AWS_S3_BUCKET_URL}/profile/default_profile.jpeg`;
     const sql = `
-    INSERT INTO couples(couple_id, user_id1, user_id2)
-    VALUES(?, ?, ?);
+    INSERT INTO couples(couple_id, user_id1, user_id2, profile_url)
+    VALUES(?, ?, ?, ?);
     `;
-    const params = [couple_id, user_id1, user_id2];
+    const params = [couple_id, user_id1, user_id2, profile_url];
     conn.query(sql, params, (err, result) => {
       if (err) {
         console.error("Query error", err);

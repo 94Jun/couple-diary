@@ -4,10 +4,17 @@ const { uploadToS3 } = require("./uploadToS3");
 
 /** 추억 등록에 의한 memories 테이블 POST, memory_phots 테이블 POST, memory_tags 테이블 POST */
 const postMemoryByAdd = async (req, res) => {
-  const { couple_id, user_id, title, content, memory_date, tags } = req.body;
+  const { couple_id, user_id, title, content, memory_date } = req.body;
   const photos = req.files;
   const memory_id = generateRandomId("memory");
   const memoryData = { memory_id, couple_id, user_id, title, content, memory_date };
+  let tags = [];
+  if (typeof req.body.tags === "string") {
+    tags.push(req.body.tags);
+  }
+  if (typeof req.body.tags === "object") {
+    tags.push(...req.body.tags);
+  }
   try {
     // memories 테이블 POST
     await requestPostMemory(memoryData);

@@ -14,6 +14,7 @@ import AddLetterPage from "./pages/AddLetterPage";
 import AddMemoryPage from "./pages/AddMemoryPage";
 import useLoginMaintenance from "./hooks/useLoginMaintenance";
 import { useEffect } from "react";
+import MemoryView from "./components/memory/MemoryView";
 
 function App() {
   const loginMaintenance = useLoginMaintenance();
@@ -33,6 +34,7 @@ function App() {
         <Route path="/letter" element={<LetterPage />} />
         <Route path="/letter/add" element={<AddLetterPage />} />
         <Route path="/memory" element={<MemoryPage />} />
+        <Route path="/memory/:memory_id" element={<MemoryView />} />
         <Route path="/memory/add" element={<AddMemoryPage />} />
         <Route path="/*" element={<Navigate to="/"></Navigate>} />
       </Routes>

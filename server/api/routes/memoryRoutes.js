@@ -1,5 +1,5 @@
 const express = require("express");
-const { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesByCoupleId } = require("../controllers/memoryController");
+const { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById } = require("../controllers/memoryController");
 const router = express.Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
@@ -9,6 +9,6 @@ router.post("/", postMemory);
 router.post("/photo", postMemoryPhoto);
 router.post("/tag", postMemoryTag);
 
-router.get("/:couple_id", getMemoriesByCoupleId);
+router.get("/", getMemoriesById);
 
 module.exports = router;

@@ -8,9 +8,9 @@ const Memories = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
 
   /** meories GET 요청 */
-  const getMemories = async (couple_id) => {
+  const getMemoriesByCoupeId = async (couple_id) => {
     const config = {
-      url: `/api/memory/${couple_id}`,
+      url: `/api/memory?type=couple&id=${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);
@@ -19,7 +19,7 @@ const Memories = () => {
 
   useEffect(() => {
     if (userInfo) {
-      getMemories(userInfo.couple_id);
+      getMemoriesByCoupeId(userInfo.couple_id);
     }
   }, [userInfo]);
 
