@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.img_wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.close_btn {
+  background: none;
+  border: none;
+  position: absolute;
+  top : 0px;
+  right : 0px;
+  width: 100px;
+  height: 100px;
+  color : #ccc;
+  cursor: pointer;
+}
+.arrow_wrap{
+  display: flex;
+}
+.back, .forward{
+  color : #ccc;
+  opacity: 0.5;
+  position: absolute;
+  top : 50%;
+  transform: translateY(-50%);
+}
+.back{
+  left : 10px;
+}
+.forward{
+  right : 10px;
+}

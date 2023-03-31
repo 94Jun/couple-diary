@@ -97,7 +97,7 @@ const Calendar = () => {
           <h3>
             {calendarInfo.year}년 {months[calendarInfo.month]}
           </h3>
-          <img src={`${process.env.REACT_APP_AWS_S3_BUCKET_URL}/sticker/test.png`} />
+          <img src={`${process.env.REACT_APP_AWS_S3_BUCKET_URL}/sticker/chunsuk_1.png`} />
         </div>
         <div className={styles.btn_wrap}>
           <button onClick={handlePrevMonth}>

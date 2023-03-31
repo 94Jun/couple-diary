@@ -108,7 +108,8 @@ const getMemoriesById = (req, res) => {
       GROUP BY mc.memory_id
     ) c ON m.memory_id = c.memory_id
     WHERE ${type === "memory" ? "m.memory" : type}_id = ?
-    ORDER BY m.memory_date DESC;
+    ORDER BY m.memory_date DESC
+    LIMIT 10;
     `;
     const params = [id];
     conn.query(sql, params, (err, rows, fields) => {
@@ -123,4 +124,34 @@ const getMemoriesById = (req, res) => {
   });
 };
 
-module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById };
+/** memoires 테이블의 memory_date 기준 내림차순 기준으로 memory_photos 테이블 100개 GET*/
+const getPhotosByCoupleId = (req, res) => {
+  const { couple_id } = req.params;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error("Connection Error", err);
+      res.status(500).json({ message: "server error" });
+      return;
+    }
+    const sql = `
+    SELECT m.*, mp.photo_id, mp.photo_url
+    FROM memories m
+    JOIN memory_photos mp ON m.memory_id = mp.memory_id
+    WHERE m.couple_id = ?
+    ORDER BY m.memory_date DESC
+    LIMIT 100;
+    `;
+    const params = [couple_id];
+    conn.query(sql, params, (err, rows, fields) => {
+      if (err) {
+        console.error("Query Error", err);
+        res.status(500).json({ message: "query error" });
+      } else {
+        res.status(200).json(rows);
+      }
+    });
+    conn.release();
+  });
+};
+
+module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById, getPhotosByCoupleId };
