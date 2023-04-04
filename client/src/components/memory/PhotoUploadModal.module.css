@@ -1,0 +1,57 @@
+
+.container {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.preview_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.preview_photo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.button_wrap {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.file_wrap{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.file_wrap label{
+  background-color: #eee;
+  padding : 10px;
+  border-radius: 5px;
+  display: block;
+}
+
+.file_wrap input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}

@@ -3,14 +3,10 @@ import { useState, useEffect } from "react";
 import MemoryCard from "./MemoryCard";
 import styles from "./Memories.module.css";
 import { useSelector } from "react-redux";
-import useToggle from "../../hooks/useToggle";
-import PhotoModal from "./PhotoModal";
-const Memories = ({ viewType }) => {
+
+const Memories = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [memories, setMemories] = useState();
-  const [photos, setPhotos] = useState();
-  const [photoModal, togglePhotoModal] = useToggle(false);
-  const [selectedIdx, setSelectedIdx] = useState(null);
 
   // 스크롤을 통한 로딩 구현 필요
   /** coupleId로 memories 불러오기 */
@@ -22,40 +18,15 @@ const Memories = ({ viewType }) => {
     const res = await axios(config);
     setMemories(res.data);
   };
-
-  // 스크롤을 통한 로딩 구현 필요
-  /** couple_id를 통해 memory_photo 불러오기(memory 테이블의 memory_date 기준 내림차순)*/
-  const getPhotosByCoupleId = async (couple_id) => {
-    const config = {
-      url: `/api/memory/photo/${couple_id}`,
-      method: "GET",
-    };
-    const res = await axios(config);
-    setPhotos(res.data);
-  };
-
-  const handlePhotoModal = (photo) => {
-    const idx = photos.findIndex((el) => {
-      return el.photo_id === photo.photo_id;
-    });
-    setSelectedIdx(idx);
-    togglePhotoModal();
-  };
-
-  const handlePhotoSlide = (idx) => {
-    setSelectedIdx(idx);
-  };
-
+  
+  /** 렌더 시 memory 테이블 불러오기 */
   useEffect(() => {
-    if (userInfo && viewType === "full") {
+    if (userInfo) {
       getMemoriesByCoupeId(userInfo.couple_id);
     }
-    if (userInfo && viewType === "img") {
-      getPhotosByCoupleId(userInfo.couple_id);
-    }
-  }, [userInfo, viewType]);
+  }, [userInfo]);
 
-  let content = (
+  return (
     <div className={styles.card_container}>
       {memories &&
         memories.length > 0 &&
@@ -68,27 +39,6 @@ const Memories = ({ viewType }) => {
         })}
     </div>
   );
-
-  if (viewType === "img") {
-    content = (
-      <>
-        <div className={styles.img_container}>
-          {photos &&
-            photos.length > 0 &&
-            photos.map((photo) => {
-              return (
-                <div key={photo.photo_id} className={styles.img_wrap} onClick={() => handlePhotoModal(photo)}>
-                  <img src={photo.photo_url} />
-                </div>
-              );
-            })}
-        </div>
-        {photoModal && selectedIdx !== null && <PhotoModal photos={photos} idx={selectedIdx} togglePhotoModal={togglePhotoModal} handlePhotoSlide={handlePhotoSlide} />}
-      </>
-    );
-  }
-
-  return content;
 };
 
 export default Memories;

@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CancelButton from "../shared/button/CancelButton";
 import MainButton from "../shared/button/MainButton";
 import styles from "./AddMemory.module.css";
+import useToggle from "../../hooks/useToggle";
+import PhotoUploadModal from "./PhotoUploadModal";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const AddMemory = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
@@ -15,15 +18,11 @@ const AddMemory = () => {
   const [content, setContent] = useState("");
   const [photos, setPhotos] = useState([]);
   const [validation, setValidation] = useState(false);
+  const [photoUploadModal, togglePhotoUploadModal] = useToggle(false);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setPhotos(files);
-    if (files) {
-      setValidation(true);
-    } else {
-      setValidation(false);
-    }
+  const handlePhotosUpload = (uploadedPhotos) => {
+    setPhotos((prevPhotos) => [...prevPhotos, ...uploadedPhotos]);
+    setValidation(true);
   };
 
   const handleDateChange = (e) => {
@@ -54,6 +53,13 @@ const AddMemory = () => {
         return tag.replace(/\s+/g, "");
       });
     setTags(tagList);
+  };
+
+  const handlePhotoDelete = (photo) => {
+    const filteredPhotos = photos.filter((el) => {
+      return el !== photo;
+    });
+    setPhotos(filteredPhotos);
   };
 
   const postMemoryByAdd = async (data) => {
@@ -101,7 +107,7 @@ const AddMemory = () => {
       alert("본문이나 사진을 등록해주세요.");
     }
   };
-
+  console.log(photos);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>추억 등록</h2>
@@ -113,13 +119,30 @@ const AddMemory = () => {
         <input type="date" id="memoryDate" onChange={handleDateChange} />
 
         <label htmlFor="memoryTags">태그</label>
-        <input type="text" id="memoryTags" placeholder="#부산 #일상" onChange={handleTagsChange} />
+        <input type="text" id="memoryTags" placeholder="#태그" onChange={handleTagsChange} />
 
+        <div>
+          <div className={styles.add_photo_wrap}>
+            <span>사진</span>
+            <button className={styles.add_photo_btn} onClick={togglePhotoUploadModal} type="button">
+              <AddPhotoAlternateIcon />
+            </button>
+          </div>
+          {photos.length > 0 && (
+            <div className={styles.photo_wrap}>
+              {photos.map((photo, idx) => {
+                const url = URL.createObjectURL(photo);
+                return (
+                  <div key={idx} className={styles.preview_wrap} onClick={() => handlePhotoDelete(photo)}>
+                    <img src={url} alt="preview" />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
         <label htmlFor="memoryContent">내용</label>
         <textarea id="memoryContent" value={content} onChange={handleContentChange}></textarea>
-
-        <label htmlFor="memoryPhotos">사진</label>
-        <input type="file" id="memoryPhotos" multiple onChange={handleFileChange} />
         <div className={styles.button_wrap}>
           <CancelButton className={styles.cancel_btn} onClick={() => navigate("/memory")}>
             취소
@@ -127,6 +150,7 @@ const AddMemory = () => {
           <MainButton>추억 등록</MainButton>
         </div>
       </form>
+      {photoUploadModal && <PhotoUploadModal togglePhotoUploadModal={togglePhotoUploadModal} handlePhotosUpload={handlePhotosUpload} />}
     </div>
   );
 };

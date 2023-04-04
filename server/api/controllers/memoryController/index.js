@@ -127,6 +127,9 @@ const getMemoriesById = (req, res) => {
 /** memoires 테이블의 memory_date 기준 내림차순 기준으로 memory_photos 테이블 100개 GET*/
 const getPhotosByCoupleId = (req, res) => {
   const { couple_id } = req.params;
+  const limit = 50;
+  const { page } = req.query;
+  
   pool.getConnection((err, conn) => {
     if (err) {
       console.error("Connection Error", err);
@@ -139,7 +142,7 @@ const getPhotosByCoupleId = (req, res) => {
     JOIN memory_photos mp ON m.memory_id = mp.memory_id
     WHERE m.couple_id = ?
     ORDER BY m.memory_date DESC
-    LIMIT 100;
+    LIMIT ${limit} OFFSET ${(page - 1) * limit};
     `;
     const params = [couple_id];
     conn.query(sql, params, (err, rows, fields) => {
@@ -154,4 +157,25 @@ const getPhotosByCoupleId = (req, res) => {
   });
 };
 
-module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById, getPhotosByCoupleId };
+/** memory_photos 테이블 count */
+const getPhotosLength = (req, res) => {
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error("Connection Error", err);
+      res.status(500).json({ message: "server error" });
+      return;
+    }
+    const sql = `SELECT COUNT(*) AS length FROM memory_photos`;
+    conn.query(sql, (err, rows, fields) => {
+      if (err) {
+        console.error("Query Error", err);
+        res.status(500).json({ message: "query error" });
+      } else {
+        res.status(200).json(rows);
+      }
+    });
+    conn.release();
+  });
+};
+
+module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById, getPhotosByCoupleId, getPhotosLength };

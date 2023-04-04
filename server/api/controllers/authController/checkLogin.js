@@ -5,7 +5,7 @@ const { requestGetUserByKakaoId } = require("../userController/requestUser");
 const checkLogin = async (req, res) => {
   const { access_token, refresh_token } = req.signedCookies;
   const tokenValidation = await checkTokenValidation(access_token);
-
+  console.log(tokenValidation);
   if (tokenValidation.validation) {
     const user = await requestGetUserByKakaoId(tokenValidation.kakao_id);
     res.status(200).json({ isLogin: true, userInfo: user });

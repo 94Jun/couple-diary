@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const cookieEncrypter = require("cookie-encrypter");
+const multer = require("multer")
 const lettersRouter = require("./api/routes/lettersRoutes");
 const authRouter = require("./api/routes/authRoutes");
 const userRouter = require("./api/routes/userRoutes");
@@ -11,12 +12,15 @@ const memoryRouter = require("./api/routes/memoryRoutes");
 
 /** 기본 설정 */
 const app = express();
+const upload = multer({ dest: "uploads/" });
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
 app.use(cookieEncrypter(process.env.COOKIE_SECRET_KEY));
+
+
 app.use("/api/letter", lettersRouter);
 app.use("/api/user", userRouter);
 app.use("/api/couple", coupleRouter);
