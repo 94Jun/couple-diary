@@ -1,0 +1,9 @@
+.container{
+  padding : 20px;
+}
+.past_anniversaries_toggle {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}

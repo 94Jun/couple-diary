@@ -17,6 +17,8 @@ import AddMemory from "./components/memory/AddMemory";
 import Photos from "./components/memory/Photos";
 import AddLetter from "./components/letter/AddLetter";
 import Memories from "./components/memory/Memories";
+import AddAnniversary from "./components/anniversary/AddAnniversary";
+import AddSchedule from "./components/schedule/AddSchedule";
 
 function App() {
   const loginMaintenance = useLoginMaintenance();
@@ -32,7 +34,10 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/anniversary" element={<AnniversaryPage />} />
+        <Route path="/anniversary/add/" element={<AddAnniversary />} />
+        <Route path="/anniversary/add/:dateParams" element={<AddAnniversary />} />
         <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/schedule/add/:dateParams" element={<AddSchedule />} />
         <Route path="/letter" element={<LetterPage />} />
         <Route path="/letter/add" element={<AddLetter />} />
         <Route path="/memory" element={<MemoryPage />}>

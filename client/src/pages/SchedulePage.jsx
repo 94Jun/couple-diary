@@ -1,7 +1,7 @@
-import Calendar from "../components/calendar/Calendar";
+import Schedule from "../components/schedule/Schedule";
 
 const SchedulePage = () => {
-  return <Calendar/>;
-}
- 
+  return <Schedule />;
+};
+
 export default SchedulePage;

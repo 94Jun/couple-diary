@@ -1,0 +1,43 @@
+.schedules_wrap {
+  font-size: 16px;
+  background-color: #eff6ff;
+  border-radius: 1em;
+  margin: 10px 0;
+}
+
+.schedule_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
+}
+
+.schedule_title {
+  padding: 10px 20px;
+}
+
+.schedule {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+}
+
+.clock_icon_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle_icon_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.content{
+  color : #666;
+  font-size: 14px;
+  padding : 0 20px 10px 20px;
+}

@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.input,
+.textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.btn_wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap : 20px;
+}
+
+.btn_wrap button{
+  flex-grow: 1;
+}

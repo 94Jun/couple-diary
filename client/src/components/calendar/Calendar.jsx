@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "./Calendar.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
+import CakeIcon from "@mui/icons-material/Cake";
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 
-const Calendar = () => {
+const Calendar = ({ handleSelectedDate, selectedDate, anniversaries }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-  const [selectedDate, setSectedDate] = useState(new Date());
+
   useEffect(() => {
     setSelectedYear(currentDate.getFullYear());
     setSelectedMonth(currentDate.getMonth());
@@ -81,13 +81,10 @@ const Calendar = () => {
   };
   const handleThisMonth = () => {
     setCurrentDate(new Date());
-    setSectedDate(new Date());
+    handleSelectedDate(new Date());
   };
   const handleNextMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1));
-  };
-  const handleSelectedDate = (date) => {
-    setSectedDate(date);
   };
 
   return (
@@ -129,22 +126,18 @@ const Calendar = () => {
               <tr key={idx} className={styles.date_tr}>
                 {dates.map((date) => {
                   const isThisMonth = date.fullDate.getMonth() === selectedMonth;
-                  const selected = selectedDate.toDateString() === date.fullDate.toDateString();
+                  const selected = selectedDate?.toDateString() === date.fullDate.toDateString();
                   const isWeekend = date.isWeekend();
+                  const isAnniversary = anniversaries?.find((ann) => ann.toString() === date.fullDate.toString()) ? true : false;
                   return (
                     <td key={date.date} onClick={() => handleSelectedDate(date.fullDate)} className={`${styles.td} ${selected ? styles.selected : ""}`}>
                       <div className={styles.date_wrap}>
                         <span className={`${styles.date} ${isWeekend ? styles.weekend : ""} ${!isThisMonth ? styles.else_month : styles.this_month}`}>
                           {date.date}
                         </span>
-
-                        {date.date % 6 == 0 && (
-                          <div className={styles.schedule_wrap}>
-                            <span className={styles.schedule}>
-                              <FiberManualRecordRoundedIcon color="inherit" fontSize="inherit" />
-                            </span>
-                          </div>
-                        )}
+                        <div className={styles.schedule_wrap}>
+                          <span className={styles.ann_icon}>{isAnniversary && <CakeIcon fontSize="inherit" color="inherit" />}</span>
+                        </div>
                       </div>
                     </td>
                   );

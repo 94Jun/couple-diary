@@ -12,6 +12,7 @@ const Photos = () => {
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [photoPage, setPhotoPage] = useState(1);
   const [maxPhotoLength, setMaxPhotoLength] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   // 스크롤을 통한 로딩 구현 필요
   /** couple_id를 통해 memory_photo 불러오기(memory 테이블의 memory_date 기준 내림차순)*/
@@ -21,16 +22,7 @@ const Photos = () => {
       method: "GET",
     };
     const res = await axios(config);
-    setPhotos((prev) => {
-      const hasDuplicate = prev?.find((photo) => photo.photo_id === res.data[0].photo_id) ? true : false;
-      if (!prev) {
-        return res.data;
-      } else if (hasDuplicate) {
-        return prev;
-      } else {
-        return [...prev, ...res.data];
-      }
-    });
+    return res.data;
   };
 
   /** 사진 개수 GET */
@@ -40,10 +32,10 @@ const Photos = () => {
       method: "GET",
     };
     const res = await axios(config);
-    setMaxPhotoLength(res.data[0].length);
+    return res.data[0].length;
   };
 
-  /** img View에서 사진 클릭 시 photoModal 오픈 및 사진 index 전달 */
+  /** 사진 클릭 시 photoModal 오픈 및 사진 index 전달 */
   const handlePhotoModal = (photo) => {
     const idx = photos.findIndex((el) => {
       return el.photo_id === photo.photo_id;
@@ -61,37 +53,56 @@ const Photos = () => {
     setPhotoPage(page);
   };
 
+  const fetchData = async () => {
+    const loadedPhotos = await getPhotosByCoupleId(userInfo.couple_id, photoPage);
+    const hasDuplicate = photos?.find((photo) => photo.photo_id === loadedPhotos[0].photo_id) ? true : false;
+    if (!photos) {
+      setPhotos(loadedPhotos);
+    } else if (!hasDuplicate) {
+      setPhotos((prev) => [...prev, ...loadedPhotos]);
+    }
+    const loadedLength = await getPhotosLength();
+    setMaxPhotoLength(loadedLength);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (userInfo) {
-      getPhotosByCoupleId(userInfo.couple_id, photoPage);
-      getPhotosLength();
+      fetchData();
     }
   }, [userInfo, photoPage]);
 
-  return (
-    <div className={styles.img_container}>
-      {photos &&
-        photos.length > 0 &&
-        photos.map((photo, idx) => {
-          return (
-            <div key={idx} className={styles.img_wrap} onClick={() => handlePhotoModal(photo)}>
-              <img src={photo.photo_url} />
-            </div>
-          );
-        })}
-      {photoModal && selectedIdx !== null && (
-        <PhotoModal
-          photos={photos}
-          idx={selectedIdx}
-          togglePhotoModal={togglePhotoModal}
-          handlePhotoSlide={handlePhotoSlide}
-          handlePhotoPage={handlePhotoPage}
-          page={photoPage}
-          maxPhotoLength={maxPhotoLength}
-        />
-      )}
-    </div>
-  );
+  let content = <div>loading...</div>;
+  if (!isLoading) {
+    content = (
+      <>
+        <h3 className={styles.length}>{`${maxPhotoLength}개의 사진`}</h3>
+        <div className={styles.img_container}>
+          {photos &&
+            photos.length > 0 &&
+            photos.map((photo, idx) => {
+              return (
+                <div key={idx} className={styles.img_wrap} onClick={() => handlePhotoModal(photo)}>
+                  <img src={photo.photo_url} />
+                </div>
+              );
+            })}
+          {photoModal && selectedIdx !== null && (
+            <PhotoModal
+              photos={photos}
+              idx={selectedIdx}
+              togglePhotoModal={togglePhotoModal}
+              handlePhotoSlide={handlePhotoSlide}
+              handlePhotoPage={handlePhotoPage}
+              page={photoPage}
+              maxPhotoLength={maxPhotoLength}
+            />
+          )}
+        </div>
+      </>
+    );
+  }
+  return content;
 };
 
 export default Photos;

@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.event_name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.event_date {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.remaining_day{
+  font-size: 14px;
+  color : #555;
+}
