@@ -1,9 +1,9 @@
 import MainButton from "../shared/button/MainButton";
-import styles from "./CoupleSettings.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
-const CoupleSettings = () => {
+
+const CoupleDisconnect = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const loginMaintenance = useLoginMaintenance();
 
@@ -18,12 +18,7 @@ const CoupleSettings = () => {
     await axios(config);
     await loginMaintenance();
   };
-  return (
-    <div>
-      <h2>커플 설정</h2>
-      <MainButton onClick={disconnectCouple}>커플 연결 해제</MainButton>
-    </div>
-  );
+  return <MainButton onClick={disconnectCouple}>커플 연결 해제</MainButton>;
 };
 
-export default CoupleSettings;
+export default CoupleDisconnect;

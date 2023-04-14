@@ -1,10 +1,12 @@
 export const formatDate = (date) => {
+  const weeksOfDay = ["일", "월", "화", "수", "목", "금", "토"];
   const year = date.getFullYear().toString().slice(2);
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
+  const week = weeksOfDay[date.getDay()];
   const hour = (date.getHours() + 9).toString().padStart(2, "0");
   const minute = date.getMinutes().toString().padStart(2, "0");
-  return `${year}. ${month}. ${day}. ${hour}:${minute}`;
+  return `${year}. ${month}. ${day}.(${week}) ${hour}:${minute}`;
 };
 
 /** 사귄 날짜에 따라 자동으로 기념일 생성해주는 함수(100일, 200일, 300일, 1주년, 2주년 +) */
@@ -37,5 +39,43 @@ export const addAutoAnniversaries = (anniversaries) => {
       });
       return generatedAnniversaries;
     }
+  }
+};
+
+/** 이전 일정과 이후 일정 구분 */
+export const divideScheduleByNow = (schedules, isNext) => {
+  if (schedules && schedules.length > 0) {
+    const updatedSchedules = schedules.filter((schedule) => {
+      const date = Object.keys(schedule);
+      const year = "20" + date.toString().slice(0, 2);
+      const month = date.toString().slice(4, 6);
+      const day = date.toString().slice(8, 10);
+      const scheduleTime = new Date(year, Number(month) - 1, day).getTime();
+      const now = new Date().setHours(0, 0, 0, 0);
+      if (isNext) {
+        return scheduleTime >= now;
+      } else {
+        return scheduleTime < now;
+      }
+    });
+    return updatedSchedules;
+  }
+};
+
+/** 일정 일자별로 구분 */
+export const divideSchedule = (schedules) => {
+  if (schedules && schedules.length > 0) {
+    const dates = schedules.map((schedule) => {
+      return schedule.schedule_date;
+    });
+    const uniqueDates = [...new Set(dates)];
+    const updatedSchedule = uniqueDates.map((date) => {
+      const scheduleDate = formatDate(new Date(date)).slice(0, 14);
+      const updatedSchedules = schedules.filter((schedule) => schedule.schedule_date === date);
+      return { [scheduleDate]: updatedSchedules };
+    });
+    return updatedSchedule;
+  } else {
+    return;
   }
 };

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { modalActions } from "../../modules/modalSlice";
 import axios from "axios";
 import MainButton from "../shared/button/MainButton";
 import styles from "./CoupleRegister.module.css";
 import CancelButton from "../shared/button/CancelButton";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
 
-const CoupleRegister = ({ toggleCoupleRegisterModal }) => {
+const CoupleRegister = () => {
+  const dispatch = useDispatch();
   const [enteredCoupleCode, setEnteredCoupleCode] = useState("");
   const [partnerInfo, setPartnerInfo] = useState(null);
   const [partnerStatus, setPartnerStatus] = useState("required");
@@ -74,7 +76,7 @@ const CoupleRegister = ({ toggleCoupleRegisterModal }) => {
       await axios(config);
       await getMyCoupleSign(userInfo.user_id);
       loginMaintenance();
-      toggleCoupleRegisterModal();
+      dispatch(modalActions.CLOSE_MODAL());
     } catch (error) {
       alert("커플 등록에 실패했습니다.");
     }
@@ -95,7 +97,7 @@ const CoupleRegister = ({ toggleCoupleRegisterModal }) => {
   };
 
   useEffect(() => {
-    if(userInfo){
+    if (userInfo) {
       getMyCoupleSign(userInfo.user_id);
     }
   }, []);
@@ -113,7 +115,7 @@ const CoupleRegister = ({ toggleCoupleRegisterModal }) => {
                 <p>코드 : {userInfo.couple_code}</p>
               </div>
               <div className={styles.button_wrap}>
-                <CancelButton onClick={toggleCoupleRegisterModal}>닫기</CancelButton>
+                <CancelButton onClick={() => dispatch(modalActions.CLOSE_MODAL())}>닫기</CancelButton>
                 <MainButton onClick={() => deleteCoupleSign(sign.sign_id)}>요청 취소</MainButton>
               </div>
             </div>
@@ -139,7 +141,7 @@ const CoupleRegister = ({ toggleCoupleRegisterModal }) => {
             {partnerInfo && partnerStatus !== "self" && <p>닉네임: {partnerInfo.nickname}</p>}
           </div>
           <div className={styles.button_wrap}>
-            <CancelButton onClick={toggleCoupleRegisterModal}>닫기</CancelButton>
+            <CancelButton onClick={() => dispatch(modalActions.CLOSE_MODAL())}>닫기</CancelButton>
             {partnerStatus === "available" && <MainButton>커플 등록</MainButton>}
           </div>
         </form>

@@ -2,9 +2,6 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import MyPage from "./pages/MyPage";
 import AnniversaryPage from "./pages/AnniversaryPage";
 import SchedulePage from "./pages/SchedulePage";
 import LetterPage from "./pages/LetterPage";
@@ -19,8 +16,13 @@ import AddLetter from "./components/letter/AddLetter";
 import Memories from "./components/memory/Memories";
 import AddAnniversary from "./components/anniversary/AddAnniversary";
 import AddSchedule from "./components/schedule/AddSchedule";
+import { useSelector } from "react-redux";
+import Modal from "./components/shared/modal/Modal";
+import MyPage from "./pages/MyPage";
+import ScheduleList from "./components/schedule/ScheduleList";
 
 function App() {
+  const activeModal = useSelector((state) => state.modal.activeModal);
   const loginMaintenance = useLoginMaintenance();
   useEffect(() => {
     loginMaintenance();
@@ -30,14 +32,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/mypage" element={<MyPage />} />
         <Route path="/anniversary" element={<AnniversaryPage />} />
         <Route path="/anniversary/add/" element={<AddAnniversary />} />
         <Route path="/anniversary/add/:dateParams" element={<AddAnniversary />} />
         <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/schedule/all" element={<ScheduleList />} />
         <Route path="/schedule/add/:dateParams" element={<AddSchedule />} />
+        <Route path="/schedule/add/" element={<AddSchedule />} />
         <Route path="/letter" element={<LetterPage />} />
         <Route path="/letter/add" element={<AddLetter />} />
         <Route path="/memory" element={<MemoryPage />}>
@@ -46,9 +47,11 @@ function App() {
         </Route>
         <Route path="/memory/:memory_id" element={<MemoryView />} />
         <Route path="/memory/add" element={<AddMemory />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/*" element={<Navigate to="/"></Navigate>} />
       </Routes>
       <Footer />
+      {activeModal && <Modal />}
     </div>
   );
 }

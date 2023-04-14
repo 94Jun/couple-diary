@@ -3,6 +3,8 @@ import styles from "./AddLetter.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MainButton from "../shared/button/MainButton";
+import CancelButton from "../shared/button/CancelButton";
 
 const AddLetter = () => {
   const navigate = useNavigate();
@@ -43,12 +45,10 @@ const AddLetter = () => {
       <form className={styles.letter_form} onSubmit={handleSubmit}>
         <textarea className={styles.letter_textarea} value={content} onChange={(event) => setContent(event.target.value)} placeholder="편지를 작성하세요." />
         <div className={styles.button_wrap}>
-          <button type="button" className={styles.cancel_button} onClick={() => navigate("/letter")}>
+          <CancelButton type="button" onClick={() => navigate(-1)}>
             취소
-          </button>
-          <button type="submit" className={styles.submit_button}>
-            편지 등록
-          </button>
+          </CancelButton>
+          <MainButton type="submit">편지 등록</MainButton>
         </div>
       </form>
     </div>

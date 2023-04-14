@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import CoupleRegister from "../components/couple/CoupleRegister";
-import Backdrop from "../components/shared/Backdrop";
+import { useSelector, useDispatch } from "react-redux";
 import MainButton from "../components/shared/button/MainButton";
-import ModalContainer from "../components/shared/ModalContainer";
-import useToggle from "../hooks/useToggle";
 import styles from "./HomePage.module.css";
+import { modalActions } from "../modules/modalSlice";
+
 const HomePage = () => {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.login.userInfo);
-  const [coupleRegisterModal, toggleCoupleRegisterModal] = useToggle(false);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     if (userInfo) {
       setIsLoading(false);
@@ -18,19 +16,20 @@ const HomePage = () => {
   }, [userInfo]);
 
   let content;
-  if ( !isLoading && !userInfo.is_couple) {
-    content = (
-      <div>
-        <MainButton onClick={toggleCoupleRegisterModal}>커플 등록</MainButton>
-        {coupleRegisterModal && (
-          <Backdrop onClick={toggleCoupleRegisterModal}>
-            <ModalContainer>
-              <CoupleRegister toggleCoupleRegisterModal={toggleCoupleRegisterModal} />
-            </ModalContainer>
-          </Backdrop>
-        )}
-      </div>
-    );
+  if (!isLoading) {
+    if (!userInfo.is_couple) {
+      content = (
+        <div>
+          <MainButton onClick={() => dispatch(modalActions.OPEN_MODAL("register"))}>커플 등록</MainButton>
+        </div>
+      );
+    } else {
+      content = (
+        <div className={styles.card}>
+          <div className={styles.card_header}></div>
+        </div>
+      );
+    }
   }
 
   return content;

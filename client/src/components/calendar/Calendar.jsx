@@ -3,11 +3,12 @@ import styles from "./Calendar.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CakeIcon from "@mui/icons-material/Cake";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 
-const Calendar = ({ handleSelectedDate, selectedDate, anniversaries }) => {
+const Calendar = ({ handleSelectedDate, selectedDate, anniversaries, schedules }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
@@ -129,6 +130,7 @@ const Calendar = ({ handleSelectedDate, selectedDate, anniversaries }) => {
                   const selected = selectedDate?.toDateString() === date.fullDate.toDateString();
                   const isWeekend = date.isWeekend();
                   const isAnniversary = anniversaries?.find((ann) => ann.toString() === date.fullDate.toString()) ? true : false;
+                  const isSchedule = schedules?.find((schedule) => schedule.schedule_date === date.fullDate.toISOString()) ? true : false;
                   return (
                     <td key={date.date} onClick={() => handleSelectedDate(date.fullDate)} className={`${styles.td} ${selected ? styles.selected : ""}`}>
                       <div className={styles.date_wrap}>
@@ -137,6 +139,7 @@ const Calendar = ({ handleSelectedDate, selectedDate, anniversaries }) => {
                         </span>
                         <div className={styles.schedule_wrap}>
                           <span className={styles.ann_icon}>{isAnniversary && <CakeIcon fontSize="inherit" color="inherit" />}</span>
+                          <span className={styles.schedule_icon}>{isSchedule && <FavoriteIcon fontSize="inherit" color="inherit" />}</span>
                         </div>
                       </div>
                     </td>

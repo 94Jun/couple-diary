@@ -3,7 +3,7 @@ import Calendar from "../calendar/Calendar";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { addAutoAnniversaries } from "../../common";
-import DailySchedule from "./DailySchedule";
+import CalendarSchedule from "./CalendarSchedule";
 
 const Schedule = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
@@ -16,7 +16,7 @@ const Schedule = () => {
     const date = new Date(ann.event_date);
     return date;
   });
-
+  
   /** couple_id를 통해 anniversaries 테이블 GET */
   const getAnniversaries = async (couple_id) => {
     const config = {
@@ -67,8 +67,8 @@ const Schedule = () => {
 
   return (
     <div>
-      <Calendar selectedDate={selectedDate} handleSelectedDate={handleSelectedDate} anniversaries={anniversarydates} />
-      {!isLoading && <DailySchedule anniversaries={updatedAnniversaries} selectedDate={selectedDate} schedules={schedules} />}
+      <Calendar selectedDate={selectedDate} handleSelectedDate={handleSelectedDate} anniversaries={anniversarydates} schedules={schedules}/>
+      {!isLoading && <CalendarSchedule anniversaries={updatedAnniversaries} selectedDate={selectedDate} schedules={schedules} />}
     </div>
   );
 };

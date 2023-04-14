@@ -18,9 +18,3 @@
   align-items: center;
   font-size: 30px;
 }
-.card_wrap{
-  margin : 0 10px;
-}
-.card_wrap > div{
-  margin-bottom: 15px;
-}

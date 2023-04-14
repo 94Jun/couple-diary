@@ -1,4 +1,4 @@
-import ModalContainer from "../shared/ModalContainer";
+import ModalContainer from "../shared/modal/ModalContainer";
 import styles from "./PhotoModal.module.css";
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";

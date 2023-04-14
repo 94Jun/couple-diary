@@ -185,7 +185,6 @@ const deleteCoupleByCoupleId = (req, res) => {
     }
     const sql = `DELETE FROM couples WHERE couple_id = ?`;
     const params = [couple_id];
-    console.log(sql, params);
     conn.query(sql, params, (err, result) => {
       if (err) {
         console.error("Query error", err);

@@ -43,9 +43,9 @@
   justify-content: center;
   gap: 20px;
 }
-
-.cancel_btn {
-  padding: 8px 32px;
+.button_wrap button{
+  flex-grow: 1;
+  max-width: 200px;
 }
 
 .add_photo_btn {

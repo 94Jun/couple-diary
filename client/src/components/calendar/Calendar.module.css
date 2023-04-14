@@ -57,7 +57,7 @@
   border-radius: 5px;
   cursor: pointer;
   vertical-align: top;
-  padding: 10px;
+  padding: 10px 0 0 0;
 }
 .date_wrap {
   display: flex;
@@ -90,6 +90,7 @@
 .schedule_wrap {
   display: flex;
   flex-wrap: wrap;
+  min-width: 50px;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
@@ -97,8 +98,16 @@
 
 .ann_icon {
   font-size: 14px;
-  color: hotpink;
+  color: #F988D4;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.schedule_icon {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color : #93C5FD;
 }

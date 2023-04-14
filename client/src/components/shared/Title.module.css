@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap');
 
 .title {
   display: flex;
@@ -15,4 +16,23 @@
   color: #FFC0CB;
   display: flex;
   align-items: center;
+}
+.container{
+  display: flex;
+  align-items: center;
+  padding : 20px;
+  gap : 10px;
+}
+.img_wrap{
+  width: 60px;
+  height: 60px;
+}
+.img_wrap img{
+  width: 100%;
+  height: auto;
+}
+.text_wrap p{
+  font-family: 'Urbanist', sans-serif;
+  font-size: 22px;
+  line-height: 20px;
 }

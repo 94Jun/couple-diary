@@ -1,0 +1,19 @@
+.card {
+  width: 330px;
+  height: 150px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background: #fbcfe8;
+  background: linear-gradient(90deg, #fbcfe8 0%, #bfdbfe 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_header{
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+  opacity: 0.4;
+  filter : blur(2px);
+}

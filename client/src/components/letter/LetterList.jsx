@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import LetterCard from "./LetterCard";
-import Backdrop from "../shared/Backdrop";
-import ModalContainer from "../shared/ModalContainer";
+import Backdrop from "../shared/modal/Backdrop";
+import ModalContainer from "../shared/modal/ModalContainer";
 import LetterView from "./LetterView";
 
 const LetterList = () => {

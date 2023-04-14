@@ -107,7 +107,7 @@ const AddMemory = () => {
       alert("본문이나 사진을 등록해주세요.");
     }
   };
-  console.log(photos);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>추억 등록</h2>
