@@ -31,7 +31,7 @@ const AddFirstMeet = ({ dateParams }) => {
       };
       await axios(config);
       setDate("");
-      navigate("/anniversary");
+      navigate("/");
     } else {
       alert("날짜를 입력해주세요.");
     }

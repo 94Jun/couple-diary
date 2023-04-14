@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import Modal from "./components/shared/modal/Modal";
 import MyPage from "./pages/MyPage";
 import ScheduleList from "./components/schedule/ScheduleList";
+import EditAnniversary from "./components/anniversary/EditAnniversary";
 
 function App() {
   const activeModal = useSelector((state) => state.modal.activeModal);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/anniversary" element={<AnniversaryPage />} />
         <Route path="/anniversary/add/" element={<AddAnniversary />} />
         <Route path="/anniversary/add/:dateParams" element={<AddAnniversary />} />
+        <Route path="/anniversary/edit/:anniversary_id" element={<EditAnniversary />} />
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/schedule/all" element={<ScheduleList />} />
         <Route path="/schedule/add/:dateParams" element={<AddSchedule />} />

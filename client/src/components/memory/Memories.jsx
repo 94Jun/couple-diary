@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import MemoryCard from "./MemoryCard";
 import styles from "./Memories.module.css";
 import { useSelector } from "react-redux";
+import Loading from "../shared/Loading";
 
 const Memories = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [memories, setMemories] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   // 스크롤을 통한 로딩 구현 필요
   /** coupleId로 memories 불러오기 */
@@ -16,29 +18,44 @@ const Memories = () => {
       method: "GET",
     };
     const res = await axios(config);
-    setMemories(res.data);
+    return res.data;
   };
-  
+
+  const fetchMemories = async (couple_id) => {
+    const loadedMemories = await getMemoriesByCoupeId(couple_id);
+    setMemories(loadedMemories);
+  };
+
+  const fetchData = async (couple_id) => {
+    await fetchMemories(couple_id);
+    setIsLoading(false);
+  };
+
   /** 렌더 시 memory 테이블 불러오기 */
   useEffect(() => {
     if (userInfo) {
-      getMemoriesByCoupeId(userInfo.couple_id);
+      fetchData(userInfo.couple_id);
     }
   }, [userInfo]);
 
-  return (
-    <div className={styles.card_container}>
-      {memories &&
-        memories.length > 0 &&
-        memories.map((memory) => {
-          return (
-            <div key={memory.memory_id} className={styles.card_wrap}>
-              <MemoryCard memory={memory} />
-            </div>
-          );
-        })}
-    </div>
-  );
+  let content = <Loading />;
+  if (!isLoading) {
+    content = (
+      <div className={styles.card_container}>
+        {memories &&
+          memories.length > 0 &&
+          memories.map((memory) => {
+            return (
+              <div key={memory.memory_id} className={styles.card_wrap}>
+                <MemoryCard memory={memory} />
+              </div>
+            );
+          })}
+      </div>
+    );
+  }
+
+  return content;
 };
 
 export default Memories;

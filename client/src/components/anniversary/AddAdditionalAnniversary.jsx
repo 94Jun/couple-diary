@@ -12,14 +12,6 @@ const AddAdditionalAnniversary = ({ dateParams }) => {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
 
-  const handleEventNameChange = (e) => {
-    setEventName(e.target.value);
-  };
-
-  const handleEventDateChange = (e) => {
-    setEventDate(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -36,7 +28,7 @@ const AddAdditionalAnniversary = ({ dateParams }) => {
     await axios(config);
     setEventName("");
     setEventDate("");
-    navigate("/schedule");
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -50,9 +42,9 @@ const AddAdditionalAnniversary = ({ dateParams }) => {
       <h2 className={styles.title}>기념일 추가</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="eventName">이름</label>
-        <input type="text" id="eventName" value={eventName} onChange={handleEventNameChange} required />
+        <input type="text" id="eventName" value={eventName} onChange={(e)=>setEventName(e.target.value)} required />
         <label htmlFor="eventDate">날짜</label>
-        <input type="date" id="eventDate" value={eventDate} onChange={handleEventDateChange} required />
+        <input type="date" id="eventDate" value={eventDate} onChange={(e)=>setEventDate(e.target.value)} required />
         <div className={styles.btn_wrap}>
           <CancelButton type="button" onClick={() => navigate(-1)}>
             취소

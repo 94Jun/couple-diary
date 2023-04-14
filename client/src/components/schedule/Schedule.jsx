@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { addAutoAnniversaries } from "../../common";
 import CalendarSchedule from "./CalendarSchedule";
+import Loading from "../shared/Loading";
 
 const Schedule = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
@@ -16,11 +17,11 @@ const Schedule = () => {
     const date = new Date(ann.event_date);
     return date;
   });
-  
+
   /** couple_id를 통해 anniversaries 테이블 GET */
   const getAnniversaries = async (couple_id) => {
     const config = {
-      url: `/api/anniversary/${couple_id}`,
+      url: `/api/anniversary/couple/${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);
@@ -36,7 +37,7 @@ const Schedule = () => {
   /** couple_id를 통해 schedules 테이블 GET */
   const getSchedules = async (couple_id) => {
     const config = {
-      url: `/api/schedule/${couple_id}`,
+      url: `/api/schedule/couple/${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);
@@ -65,12 +66,17 @@ const Schedule = () => {
     setSelectedDate(date);
   };
 
-  return (
-    <div>
-      <Calendar selectedDate={selectedDate} handleSelectedDate={handleSelectedDate} anniversaries={anniversarydates} schedules={schedules}/>
-      {!isLoading && <CalendarSchedule anniversaries={updatedAnniversaries} selectedDate={selectedDate} schedules={schedules} />}
-    </div>
-  );
+  let content = <Loading />;
+  if (!isLoading) {
+    content = (
+      <div>
+        <Calendar selectedDate={selectedDate} handleSelectedDate={handleSelectedDate} anniversaries={anniversarydates} schedules={schedules} />
+        <CalendarSchedule anniversaries={updatedAnniversaries} selectedDate={selectedDate} schedules={schedules} />
+      </div>
+    );
+  }
+
+  return content;
 };
 
 export default Schedule;

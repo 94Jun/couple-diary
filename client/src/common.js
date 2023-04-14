@@ -26,13 +26,13 @@ export const addAutoAnniversaries = (anniversaries) => {
         const anniversary_id = "ann_" + Date.now() + Math.floor(Math.random() * 1000000);
         const event_date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + (day - 1)).toISOString();
         const event_name = `${day}일`;
-        return { anniversary_id, event_date, event_name };
+        return { anniversary_id, event_date, event_name, isAuto: true };
       });
       const yearAnniversaries = yearMilestones.map((year) => {
         const anniversary_id = "ann_" + Date.now() + Math.floor(Math.random() * 1000000);
         const event_date = new Date(startDate.getFullYear() + year, startDate.getMonth(), startDate.getDate()).toISOString();
         const event_name = `${year}주년`;
-        return { anniversary_id, event_date, event_name };
+        return { anniversary_id, event_date, event_name, isAuto: true };
       });
       const generatedAnniversaries = [...anniversaries, ...dayAnniversaries, ...yearAnniversaries].sort((a, b) => {
         return a.event_date >= b.event_date ? 1 : -1;

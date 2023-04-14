@@ -4,6 +4,7 @@ import axios from "axios";
 import useToggle from "../../hooks/useToggle";
 import styles from "./Photos.module.css";
 import PhotoModal from "./PhotoModal";
+import Loading from "../shared/Loading";
 
 const Photos = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
@@ -72,7 +73,7 @@ const Photos = () => {
     }
   }, [userInfo, photoPage]);
 
-  let content = <div>loading...</div>;
+  let content = <Loading/>;
   if (!isLoading) {
     content = (
       <>

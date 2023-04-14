@@ -8,6 +8,7 @@ import DailySchedule from "./DailySchedule";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import useToggle from "../../hooks/useToggle";
+import Loading from "../shared/Loading";
 const ScheduleList = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [schedules, setSchedules] = useState(true);
@@ -23,7 +24,7 @@ const ScheduleList = () => {
   /** couple_id를 통해 schedules 테이블 GET */
   const getSchedules = async (couple_id) => {
     const config = {
-      url: `/api/schedule/${couple_id}`,
+      url: `/api/schedule/couple/${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);
@@ -47,7 +48,7 @@ const ScheduleList = () => {
     }
   }, [userInfo]);
 
-  let content;
+  let content = <Loading />;
   if (!isLoading) {
     content = (
       <div className={styles.container}>

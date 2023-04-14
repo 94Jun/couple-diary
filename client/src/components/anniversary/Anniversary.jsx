@@ -8,6 +8,8 @@ import { addAutoAnniversaries } from "../../common";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import LinkButton from "../shared/button/LinkButton";
+import Loading from "../shared/Loading";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const Anniversary = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
@@ -16,11 +18,12 @@ const Anniversary = () => {
   const [preIsVisible, togglePreIsVisible] = useToggle(false);
   const [nextIsVisible, toggleNextIsVisible] = useToggle(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [editMode, toggleEditMode] = useToggle(false);
 
   /** couple_id를 통해 anniversaries 테이블 GET */
   const getAnniversaries = async (couple_id) => {
     const config = {
-      url: `/api/anniversary/${couple_id}`,
+      url: `/api/anniversary/couple/${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);
@@ -48,12 +51,17 @@ const Anniversary = () => {
   const upcomingAnniversaries = updatedAnniversaries?.filter((ann) => new Date(ann.event_date).setHours(0, 0, 0, 0) >= today);
   const pastAnniversaries = updatedAnniversaries?.filter((ann) => new Date(ann.event_date).setHours(0, 0, 0, 0) < today);
 
-  let content;
+  let content = <Loading />;
 
   if (!isLoading) {
     content = (
       <div className={styles.container}>
-        <LinkButton url="/anniversary/add">기념일 등록</LinkButton>
+        <div className={styles.header}>
+          <LinkButton url="/anniversary/add">기념일 등록</LinkButton>
+          <button className={styles.setting_icon} type="button" onClick={toggleEditMode}>
+            <SettingsIcon fontSize="inherit" color="inherit" />
+          </button>
+        </div>
         <div className={styles.schedule_wrap}>
           <div className={styles.schedule_header}>
             <h4>지난 기념일</h4>
@@ -66,7 +74,7 @@ const Anniversary = () => {
               pastAnniversaries &&
               pastAnniversaries.length > 0 &&
               pastAnniversaries.map((ann) => {
-                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} />;
+                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
               })}
           </div>
         </div>
@@ -82,7 +90,7 @@ const Anniversary = () => {
               upcomingAnniversaries &&
               upcomingAnniversaries.length > 0 &&
               upcomingAnniversaries.map((ann) => {
-                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} />;
+                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
               })}
           </div>
         </div>
