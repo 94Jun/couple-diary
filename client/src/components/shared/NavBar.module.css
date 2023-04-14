@@ -4,23 +4,26 @@
   right: 0;
   width: 60%;
   max-width: 500px;
+  min-width: 200px;
   height: 100vh;
   background-color: #fff;
   overflow: auto;
   animation-name: slide;
-  animation-duration: 200ms;
+  animation-duration: 250ms;
 }
 @keyframes slide {
   from {
     width: 0%;
+    min-width: 0px;
   }
   to {
     width: 60%;
+    min-width: 200px;
   }
 }
 
 .header {
-  height: 25vh;
+  height: 30vh;
   background: #fbcfe8;
   background: linear-gradient(90deg, #fbcfe8 0%, #bfdbfe 100%);
   display: flex;

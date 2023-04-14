@@ -62,8 +62,8 @@ const Anniversary = () => {
             <SettingsIcon fontSize="inherit" color="inherit" />
           </button>
         </div>
-        <div className={styles.schedule_wrap}>
-          <div className={styles.schedule_header}>
+        <div className={styles.anniversary_wrap}>
+          <div className={styles.anniversary_header}>
             <h4>지난 기념일</h4>
             <div onClick={togglePreIsVisible}>
               {preIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
@@ -78,8 +78,8 @@ const Anniversary = () => {
               })}
           </div>
         </div>
-        <div className={styles.schedule_wrap}>
-          <div className={styles.schedule_header}>
+        <div className={styles.anniversary_wrap}>
+          <div className={styles.anniversary_header}>
             <h4>기념일</h4>
             <div onClick={toggleNextIsVisible}>
               {nextIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}

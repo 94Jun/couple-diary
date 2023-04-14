@@ -13,13 +13,13 @@
   background: none;
   border : none;
 }
-.schedule_wrap{
+.anniversary_wrap{
   padding : 20px 20px 0 20px;
 }
-.schedule_wrap:last-of-type{
+.anniversary_wrap:last-of-type{
   padding-bottom: 20px;
 }
-.schedule_header{
+.anniversary_header{
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -27,7 +27,7 @@
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
-.schedule_header > div{
+.anniversary_header > div{
   display: flex;
   justify-content: center;
   align-items: center;

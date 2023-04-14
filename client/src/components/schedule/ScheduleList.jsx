@@ -9,12 +9,15 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import useToggle from "../../hooks/useToggle";
 import Loading from "../shared/Loading";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 const ScheduleList = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [schedules, setSchedules] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [preIsVisible, togglePreIsVisible] = useToggle(false);
   const [nextIsVisible, toggleNextIsVisible] = useToggle(true);
+  const [editMode, toggleEditMode] = useToggle(false);
 
   // 일자별로 현재 기준 일정 구분
   const dividedSchedules = divideSchedule(schedules);
@@ -52,7 +55,12 @@ const ScheduleList = () => {
   if (!isLoading) {
     content = (
       <div className={styles.container}>
-        <LinkButton url="/schedule/add">일정 등록</LinkButton>
+        <div className={styles.header}>
+          <LinkButton url="/schedule/add">일정 등록</LinkButton>
+          <button className={styles.setting_icon} type="button" onClick={toggleEditMode}>
+            <SettingsIcon fontSize="inherit" color="inherit" />
+          </button>
+        </div>
         <div className={styles.schedule_wrap}>
           <div className={styles.schedule_header}>
             <h4>지난 일정</h4>
@@ -64,7 +72,7 @@ const ScheduleList = () => {
             preSchedules &&
             preSchedules.length > 0 &&
             preSchedules.map((schedule, idx) => {
-              return <DailySchedule key={idx} schedules={schedule} />;
+              return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData}/>;
             })}
         </div>
         <div className={styles.schedule_wrap}>
@@ -78,7 +86,7 @@ const ScheduleList = () => {
             nextSchedules &&
             nextSchedules.length > 0 &&
             nextSchedules.map((schedule, idx) => {
-              return <DailySchedule key={idx} schedules={schedule} />;
+              return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData}/>;
             })}
         </div>
       </div>

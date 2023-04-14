@@ -23,18 +23,22 @@ const EditAnniversary = () => {
     if (res.data.length > 0) {
       return res.data[0];
     } else {
-      alert("존자하지 않는 기념일입니다.");
       navigate("/anniversary");
+      return;
     }
   };
 
   const fetchAnniversary = async (anniversary_id) => {
     const loadedAnniversary = await getAnniversaryById(anniversary_id);
-    setAnniversary(loadedAnniversary);
-    const { event_date } = loadedAnniversary;
-    const date = new Date(event_date.slice(0, 4), Number(event_date.slice(5, 7) - 1), Number(event_date.slice(8, 10)) + 1, 9).toISOString().slice(0, 10);
-    setEventDate(date);
-    setEventName(loadedAnniversary.event_name);
+    if (loadedAnniversary) {
+      setAnniversary(loadedAnniversary);
+      const { event_date } = loadedAnniversary;
+      const date = new Date(event_date.slice(0, 4), Number(event_date.slice(5, 7) - 1), Number(event_date.slice(8, 10)) + 1, 9).toISOString().slice(0, 10);
+      setEventDate(date);
+      setEventName(loadedAnniversary.event_name);
+    } else {
+      return;
+    }
   };
 
   const fetchData = async (anniversary_id) => {
@@ -60,7 +64,7 @@ const EditAnniversary = () => {
     await updateAnniversary(anniversary_id);
     navigate(-1);
   };
-  
+
   let content = <Loading />;
   if (!isLoading) {
     content = (

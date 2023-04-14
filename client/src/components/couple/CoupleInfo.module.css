@@ -1,9 +1,9 @@
-
 .profile_wrap {
   width: 100px;
   height: 100px;
   border-radius: 10px;
   margin: 0 auto;
+  margin-bottom: 16px;
 }
 .profile_wrap img {
   width: 100%;
@@ -11,18 +11,20 @@
   border-radius: 10px;
   object-fit: cover;
 }
-.name_wrap {
+.link {
+  margin-top : 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  gap : 3px;
+  gap: 5px;
 }
 
-.heart_icon {
-  font-size: 20px;
-  color: red;
+.link_icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  background-color: #eff6ff;
+  font-size: 20px;
 }

@@ -1,0 +1,77 @@
+.container{
+  background: #fdf2f8;
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 5/3;
+  background: url(../../../public/images/background1.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 850px;
+  max-height: 500px;
+  position: relative;
+  font-family: "KyoboHandwriting2021sjy";
+  min-width: 280px;
+  margin : 0 auto;
+}
+
+.profile {
+  width: 25%;
+  max-width: 200px;
+  position: absolute;
+  top: 10%;
+  left: 8%;
+}
+.profile img {
+  width: 100%;
+  border-radius: 1em;
+}
+
+.day {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  border-radius: 10px;
+  padding: 5px 0;
+  min-width: 120px;
+}
+
+.name {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap : 2px;
+  top : 10%;
+  width: 55%;
+  right : 0;
+  font-size: 20px;
+  min-width: 120px;
+}
+
+.heart_icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color : tomato;
+}
+
+.start_date{
+  position: absolute;
+  bottom : 10%;
+  right : 0;
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  min-width: 120px;
+}

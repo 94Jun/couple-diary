@@ -21,6 +21,7 @@ import Modal from "./components/shared/modal/Modal";
 import MyPage from "./pages/MyPage";
 import ScheduleList from "./components/schedule/ScheduleList";
 import EditAnniversary from "./components/anniversary/EditAnniversary";
+import EditSchedule from "./components/schedule/EditSchedule";
 
 function App() {
   const activeModal = useSelector((state) => state.modal.activeModal);
@@ -41,6 +42,7 @@ function App() {
         <Route path="/schedule/all" element={<ScheduleList />} />
         <Route path="/schedule/add/:dateParams" element={<AddSchedule />} />
         <Route path="/schedule/add/" element={<AddSchedule />} />
+        <Route path="/schedule/edit/:schedule_id" element={<EditSchedule />} />
         <Route path="/letter" element={<LetterPage />} />
         <Route path="/letter/add" element={<AddLetter />} />
         <Route path="/memory" element={<MemoryPage />}>

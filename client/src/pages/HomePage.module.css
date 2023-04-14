@@ -1,19 +1,21 @@
 .card {
-  width: 330px;
-  height: 150px;
-  margin: 20px auto;
-  border-radius: 10px;
-  background: #fbcfe8;
-  background: linear-gradient(90deg, #fbcfe8 0%, #bfdbfe 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  aspect-ratio: 5/3;
+  background: url(../../public/images/background1.png) #fdf2f8;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-height: 500px;
+  position: relative;
 }
 
-.card_header{
-  width: 80%;
-  height: 80%;
-  background-color: #fff;
-  opacity: 0.4;
-  filter : blur(2px);
+.profile{
+  width: 25%;
+  position: absolute;
+  top : 10%;
+  left : 8%;
+}
+.profile img{
+  width: 100%;
+  border-radius: 1em;
 }

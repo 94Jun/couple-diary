@@ -4,6 +4,7 @@
   border-radius: 1em;
   margin: 10px 0;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding : 5px 20px;
 }
 
 .schedule_header {
@@ -13,15 +14,10 @@
   min-height: 50px;
 }
 
-.schedule_title {
-  padding: 10px 20px;
-}
-
 .schedule {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 10px 20px;
 }
 
 .clock_icon_wrap {
@@ -40,5 +36,18 @@
 .content{
   color : #666;
   font-size: 14px;
-  padding : 0 20px 10px 20px;
+  padding-bottom: 10px;
+}
+
+.edit_wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap : 16px;
+}
+.edit_wrap button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color : #444;
 }
