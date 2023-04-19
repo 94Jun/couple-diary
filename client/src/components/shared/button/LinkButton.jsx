@@ -1,7 +1,7 @@
 import styles from "./LinkButton.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
-const AddButton = (props) => {
+const LinkButton = (props) => {
   return (
     <Link to={props.url}>
       <div className={styles.icon_wrap}>
@@ -12,4 +12,4 @@ const AddButton = (props) => {
   );
 };
 
-export default AddButton;
+export default LinkButton;

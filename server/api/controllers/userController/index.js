@@ -82,11 +82,18 @@ const postUser = (req, res) => {
       return;
     }
     const { user_id, kakao_id, nickname, age_range, birthday, birthday_type, email, gender, connected_at, couple_code, is_couple } = req.body;
+    let formattedGender = "선택안함";
+    if (gender === "male") {
+      formattedGender = "남";
+    }
+    if (gender === "female") {
+      formattedGender = "여";
+    }
     const sql = `
     INSERT INTO users (user_id, kakao_id, nickname, age_range, birthday, birthday_type, email, gender, connected_at, couple_code, is_couple)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
-    const params = [user_id, kakao_id, nickname, age_range, birthday, birthday_type, email, gender, connected_at, couple_code, is_couple];
+    const params = [user_id, kakao_id, nickname, age_range, birthday, birthday_type, email, formattedGender, connected_at, couple_code, is_couple];
     conn.query(sql, params, (err, result) => {
       if (err) {
         console.error("Query error", err);
@@ -126,4 +133,31 @@ const updateUserByChangeCouple = (req, res) => {
   });
 };
 
-module.exports = { getUserByKakaoId, postUser, getUserByCoupleCode, updateUserByChangeCouple };
+const updateUser = (req, res) => {
+  const { user_id } = req.params;
+  const { nickname, gender } = req.body;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error("connection error", err);
+      res.status(500).json({ message: "서버 에러" });
+      return;
+    }
+    const sql = `
+    UPDATE users
+    SET nickname = ?, gender = ?
+    WHERE user_id = ?
+    `;
+    const params = [nickname, gender, user_id];
+    conn.query(sql, params, (err, result) => {
+      if (err) {
+        console.error("Query error", err);
+        res.status(500).json({ message: "쿼리 에러" });
+      } else {
+        res.status(200).json({ message: "유저 정보가 수정되었습니다." });
+      }
+    });
+    conn.release();
+  });
+};
+
+module.exports = { getUserByKakaoId, postUser, getUserByCoupleCode, updateUserByChangeCouple, updateUser };

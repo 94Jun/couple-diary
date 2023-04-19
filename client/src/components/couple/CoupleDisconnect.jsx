@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
 
-const CoupleDisconnect = () => {
+const CoupleDisconnect = (props) => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const loginMaintenance = useLoginMaintenance();
 
@@ -18,7 +18,11 @@ const CoupleDisconnect = () => {
     await axios(config);
     await loginMaintenance();
   };
-  return <MainButton onClick={disconnectCouple}>커플 연결 해제</MainButton>;
+  return (
+    <div className={props.className}>
+      <MainButton onClick={disconnectCouple}>커플 연결 해제</MainButton>
+    </div>
+  );
 };
 
 export default CoupleDisconnect;

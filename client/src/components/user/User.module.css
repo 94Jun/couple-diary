@@ -1,0 +1,63 @@
+.container {
+  padding: 10px 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.icon_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  font-size: 20px;
+}
+.title {
+  font-size: 24px;
+}
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.form label {
+  margin: 10px 0;
+}
+.logout_wrap p {
+  margin: 10px 0;
+}
+.btn_wrap {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btn_wrap button {
+  flex-grow: 1;
+}
+.form input,
+.form select {
+  width: 100%;
+  min-height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  padding: 5px 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.form input:disabled,
+.form select:disabled {
+  background: #eee;
+  color: black;
+  border: 1px solid #aaa;
+}
+
+.logout {
+  display: block;
+}
+.logout button {
+  width: 100%;
+}

@@ -4,7 +4,7 @@ const fs = require("fs");
 const util = require("util");
 const unlinkAsync = util.promisify(fs.unlink);
 
-const uploadToS3 = async (file) => {
+const uploadMemoryToS3 = async (file) => {
   const fileStream = fs.createReadStream(file.path);
   const uploadParams = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -20,4 +20,4 @@ const uploadToS3 = async (file) => {
   await unlinkAsync(file.path);
 };
 
-module.exports = { uploadToS3 };
+module.exports = { uploadMemoryToS3 };

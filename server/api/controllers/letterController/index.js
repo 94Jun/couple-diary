@@ -86,4 +86,26 @@ const postLetterReader = (req, res) => {
   });
 };
 
-module.exports = { getLettersByCoupleId, postLetter, postLetterReader };
+const deleteLetterById = (req, res) => {
+  const { letter_id } = req.params;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(`server error`, err);
+      res.status(500).json({ message: "서버 에러" });
+      return;
+    }
+    const sql = `DELETE FROM letters WHERE letter_id = ?`;
+    const params = [letter_id];
+    conn.query(sql, params, (err, result) => {
+      if (err) {
+        console.error(`Query error`, err);
+        res.status(500).json({ message: "쿼리 에러" });
+      } else {
+        res.status(200).json({ message: "삭제 완료" });
+      }
+    });
+    conn.release();
+  });
+};
+
+module.exports = { getLettersByCoupleId, postLetter, postLetterReader, deleteLetterById };

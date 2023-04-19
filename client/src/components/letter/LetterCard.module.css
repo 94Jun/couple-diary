@@ -36,3 +36,32 @@
   font-size: 12px;
   color: #777;
 }
+.view{
+  font-size: 12px;
+  color: #777;
+}
+.not_view{
+  font-size: 12px;
+  color : #3b82f6;
+}
+
+.other_wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap : 10px;
+}
+
+.edit_wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap : 16px;
+  margin-top : 10px;
+}
+.edit_wrap button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color : #444;
+}

@@ -1,6 +1,7 @@
 const pool = require("../../../config/db");
 const { registCouple } = require("./registCouple");
 const { disconnectCouple } = require("./disconnectCouple");
+const { uploadProfileToS3 } = require("./uploadProfileToS3");
 
 /** user_id를 통한 couple_sign 테이블 GET */
 const getCoupleSign = (req, res) => {
@@ -197,6 +198,35 @@ const deleteCoupleByCoupleId = (req, res) => {
   });
 };
 
+const updateCouple = async (req, res) => {
+  const { couple_id } = req.params;
+  const profile = req.file;
+  const profile_url = `${process.env.AWS_S3_BUCKET_URL}/profile/${profile.filename}`;
+  await uploadProfileToS3(profile);
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error("connection error", err);
+      res.status(500).json({ message: "서버 에러" });
+      return;
+    }
+    const sql = `
+    UPDATE couples
+    SET profile_url = ?
+    WHERE couple_id = ?
+    `;
+    const params = [profile_url, couple_id];
+    conn.query(sql, params, (err, result) => {
+      if (err) {
+        console.error("Query error", err);
+        res.status(500).json({ message: "쿼리 에러" });
+      } else {
+        res.status(200).json({ message: "커플 정보가 수정되었습니다." });
+      }
+    });
+    conn.release();
+  });
+};
+
 module.exports = {
   deleteCoupleSignByCoupleCode,
   deleteCoupleSignBySignId,
@@ -208,4 +238,5 @@ module.exports = {
   deleteCoupleByCoupleId,
   registCouple,
   disconnectCouple,
+  updateCouple,
 };

@@ -2,8 +2,9 @@ import styles from "./LetterCard.module.css";
 import { formatDate } from "../../common";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const LetterCard = ({ letter, openLetterView, getLettersByCoupleId }) => {
+const LetterCard = ({ letter, openLetterView, fetchData, editMode }) => {
   const timestamp = formatDate(new Date(letter.created_at));
   const userInfo = useSelector((state) => state.login.userInfo);
   const { readers } = letter;
@@ -25,28 +26,46 @@ const LetterCard = ({ letter, openLetterView, getLettersByCoupleId }) => {
       console.error(error);
     }
   };
-  
-  const handleClick = async () => {
+
+  const openLetterModal = async () => {
     openLetterView(letter);
     if (!view) {
       await postLetterReader(letter.letter_id);
-      await getLettersByCoupleId(userInfo.couple_id);
+      await fetchData(userInfo.couple_id);
     }
   };
 
+  const deleteLetter = async () => {
+    const config = {
+      url: `/api/letter/${letter.letter_id}`,
+      method: "DELETE",
+    };
+    await axios(config);
+    await fetchData(userInfo.couple_id);
+  };
+
   return (
-    <div className={styles.letter_card} onClick={handleClick}>
-      <div className={styles.card_content}>
+    <div className={styles.letter_card}>
+      <div className={styles.card_content} onClick={openLetterModal}>
         <p>
           {contentPreview}
           {contentPreview.length === 100 && "..."}
         </p>
       </div>
-      <div className={styles.card_footer}>
+      <div className={styles.card_footer} onClick={openLetterModal}>
         <p className={styles.nickname}>{letter.nickname}</p>
-        <p>{view ? "읽음" : "읽지 않음"}</p>
-        <p className={styles.timestamp}>{timestamp}</p>
+        <div className={styles.other_wrap}>
+          <p className={styles.timestamp}>{timestamp}</p>
+          {view ? <p className={styles.view}>읽음</p> : <p className={styles.not_view}>읽지 않음</p>}
+        </div>
       </div>
+      {editMode && letter.user_id === userInfo.user_id && (
+        <div className={styles.edit_wrap}>
+          <button onClick={deleteLetter}>
+            <DeleteIcon fontSize="inherit" color="inherit" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

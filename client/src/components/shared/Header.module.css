@@ -1,7 +1,11 @@
 .container{
+  position: sticky;
+  top : 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  z-index: 100;
 }
 .icon_wrap{
   margin-right: 30px;

@@ -4,8 +4,6 @@ import { modalActions } from "../../modules/modalSlice";
 import MainButton from "./button/MainButton";
 import CloseIcon from "@mui/icons-material/Close";
 import CoupleInfo from "../couple/CoupleInfo";
-import Logout from "../login/Logout";
-import CoupleDisconnect from "../couple/CoupleDisconnect";
 import { Link } from "react-router-dom";
 
 const navs = [
@@ -13,7 +11,7 @@ const navs = [
     title: "일정",
     detail: [
       { url: "/schedule", text: "달력" },
-      { url: "/schedule/all", text: "일정 보기" },
+      { url: "/schedule/all", text: "일정 확인" },
       { url: "/schedule/add", text: "일정 등록" },
     ],
   },
@@ -21,20 +19,21 @@ const navs = [
     title: "추억",
     detail: [
       { url: "/memory", text: "추억 보기" },
+      { url: "/memory/photo", text: "사진" },
       { url: "/memory/add", text: "추억 등록" },
     ],
   },
   {
     title: "편지",
     detail: [
-      { url: "/letter", text: "편지 보기" },
+      { url: "/letter", text: "편지 읽기" },
       { url: "/letter/add", text: "편지 쓰기" },
     ],
   },
   {
     title: "기념일",
     detail: [
-      { url: "/anniversary", text: "기념일 보기" },
+      { url: "/anniversary", text: "기념일 확인" },
       { url: "/anniversary/add", text: "기념일 등록" },
     ],
   },
@@ -81,8 +80,6 @@ const NavBar = () => {
           })}
         </ul>
       </nav>
-      {userInfo && <Logout />}
-      {userInfo?.is_couple && <CoupleDisconnect />}
     </div>
   );
 };

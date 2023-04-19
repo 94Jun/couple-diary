@@ -9,11 +9,11 @@ const AddAnniversary = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [anniversaries, setAnniversaries] = useState();
   const { dateParams } = useParams();
-
+  
   /** couple_id를 통해 anniversaries 테이블 GET */
   const getAnniversaries = async (couple_id) => {
     const config = {
-      url: `/api/anniversary/${couple_id}`,
+      url: `/api/anniversary/couple/${couple_id}`,
       method: "GET",
     };
     const res = await axios(config);

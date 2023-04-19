@@ -1,0 +1,100 @@
+.container {
+  margin: 10px 0;
+  padding: 10px 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.title {
+  font-size: 24px;
+}
+.icon_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  font-size: 20px;
+}
+.img_wrap {
+  width: 150px;
+  height: 150px;
+  border-radius: 1em;
+  margin: 10px 0;
+}
+.img_wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1em;
+  border: 1px solid #ccc;
+}
+
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.form label {
+  margin: 10px 0;
+}
+
+.disconnect_wrap p {
+  margin: 10px 0;
+}
+.btn_wrap {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btn_wrap button {
+  flex-grow: 1;
+}
+.form input {
+  width: 100%;
+  min-height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  padding: 5px 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.form input:disabled {
+  background: #eee;
+  color: black;
+  border: 1px solid #aaa;
+}
+
+.disconnect button {
+  width: 100%;
+}
+
+.edit_profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit_profile label {
+  display: block;
+  background-color: #eee;
+  border: none;
+  padding : 8px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  border : 1px solid #aaa;
+  font-size: 14px;
+}
+
+.edit_profile input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}

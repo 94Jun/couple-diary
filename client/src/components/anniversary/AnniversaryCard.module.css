@@ -30,6 +30,7 @@
   justify-content: flex-end;
   align-items: center;
   gap : 16px;
+  margin-top : 10px;
 }
 .edit_wrap button {
   background: none;
