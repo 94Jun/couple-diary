@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ModalContainer from "../shared/modal/ModalContainer";
-import MainButton from "../shared/button/MainButton";
-import CancelButton from "../shared/button/CancelButton";
+import ModalContainer from "../../shared/modal/ModalContainer";
+import MainButton from "../../shared/button/MainButton";
+import CancelButton from "../../shared/button/CancelButton";
 import styles from "./PhotoUploadModal.module.css";
-import Backdrop from "../shared/modal/Backdrop";
+import Backdrop from "../../shared/modal/Backdrop";
 
 const PhotoUploadModal = ({ togglePhotoUploadModal, handlePhotosUpload }) => {
   const [photos, setPhotos] = useState([]);

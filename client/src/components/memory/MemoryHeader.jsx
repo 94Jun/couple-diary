@@ -4,12 +4,20 @@ import ViewStreamIcon from "@mui/icons-material/ViewStream";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LinkButton from "../shared/button/LinkButton";
 import { Link } from "react-router-dom";
-const MemoryHeader = ({toggleEditMode}) => {
+const MemoryHeader = ({editMode, toggleEditMode, setInitial}) => {
+  const toggleMode = () => {
+    if(editMode){
+      toggleEditMode()
+      setInitial()
+    } else{
+      toggleEditMode()
+    }
+  }
   return (
     <div className={styles.header}>
       <div className={styles.btn_wrap}>
         <LinkButton url="/memory/add">추억 등록</LinkButton>
-        <button className={styles.setting_icon} onClick={toggleEditMode}>
+        <button className={styles.setting_icon} onClick={toggleMode}>
           <SettingsIcon fontSize="inherit" color="inherit" />
         </button>
       </div>

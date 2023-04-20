@@ -6,7 +6,7 @@ import CancelButton from "../shared/button/CancelButton";
 import MainButton from "../shared/button/MainButton";
 import styles from "./AddMemory.module.css";
 import useToggle from "../../hooks/useToggle";
-import PhotoUploadModal from "./PhotoUploadModal";
+import PhotoUploadModal from "./photo/PhotoUploadModal";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const AddMemory = () => {

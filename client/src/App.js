@@ -11,7 +11,7 @@ import Footer from "./components/shared/Footer";
 import useLoginMaintenance from "./hooks/useLoginMaintenance";
 import MemoryView from "./components/memory/MemoryView";
 import AddMemory from "./components/memory/AddMemory";
-import Photos from "./components/memory/Photos";
+import Photos from "./components/memory/photo/Photos";
 import AddLetter from "./components/letter/AddLetter";
 import Memories from "./components/memory/Memories";
 import AddAnniversary from "./components/anniversary/AddAnniversary";

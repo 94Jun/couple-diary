@@ -12,6 +12,7 @@ const Memories = () => {
   const [memories, setMemories] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, toggleEditMode] = useToggle(false);
+  const [selectedMemories, setSelectedMemories] = useState([]);
 
   // 스크롤을 통한 로딩 구현 필요
   /** coupleId로 memories 불러오기 */
@@ -45,7 +46,7 @@ const Memories = () => {
   if (!isLoading) {
     content = (
       <div className={styles.container}>
-        <MemoryHeader toggleEditMode={toggleEditMode} />
+        <MemoryHeader editMode={editMode} toggleEditMode={toggleEditMode} setInitial={() => setSelectedMemories([])} />
         <div className={styles.card_container}>
           {memories &&
             memories.length > 0 &&

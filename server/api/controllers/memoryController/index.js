@@ -127,7 +127,7 @@ const getMemoriesById = (req, res) => {
 /** memoires 테이블의 memory_date 기준 내림차순 기준으로 memory_photos 테이블 100개 GET*/
 const getPhotosByCoupleId = (req, res) => {
   const { couple_id } = req.params;
-  const limit = 30;
+  const limit = 50;
   const { page } = req.query;
 
   pool.getConnection((err, conn) => {
