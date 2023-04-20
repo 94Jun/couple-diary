@@ -15,8 +15,25 @@ const LetterList = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [letters, setLetters] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState(null);
+  const [letterFilter, setLetterFilter] = useState("yours");
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, toggleEditMode] = useToggle(false);
+
+  const filterLetter = (letters, filter) => {
+    if (letters) {
+      if (filter === "all") {
+        return letters;
+      } else if (filter === "mine") {
+        return letters.filter((letter) => letter.user_id === userInfo.user_id);
+      } else {
+        return letters.filter((letter) => letter.user_id !== userInfo.user_id);
+      }
+    } else {
+      return;
+    }
+  };
+
+  const filteredLetter = filterLetter(letters, letterFilter);
 
   /** letters 테이블에서 couple_id에 해당하는 튜플 GET */
   const getLettersByCoupleId = async (couple_id) => {
@@ -67,7 +84,12 @@ const LetterList = () => {
             <SettingsIcon fontSize="inherit" color="inherit" />
           </button>
         </div>
-        {letters.map((letter) => (
+        <ul className={styles.nav}>
+          <li className={letterFilter === "all" ? styles.selected : ""} onClick={()=>setLetterFilter("all")}>전체 보기</li>
+          <li className={letterFilter === "yours" ? styles.selected : ""} onClick={()=>setLetterFilter("yours")}>내게 온 편지</li>
+          <li className={letterFilter === "mine" ? styles.selected : ""} onClick={()=>setLetterFilter("mine")}>내가 쓴 편지</li>
+        </ul>
+        {filteredLetter?.map((letter) => (
           <LetterCard key={letter.letter_id} letter={letter} openLetterView={openLetterView} fetchData={fetchData} editMode={editMode} />
         ))}
         {selectedLetter && (

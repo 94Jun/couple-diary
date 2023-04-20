@@ -46,7 +46,7 @@ const AddSchedule = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>일정 추가</h2>
+      <h2 className={styles.title}>일정 등록</h2>
       <form onSubmit={handlePostSchedule} className={styles.form}>
         <label htmlFor="title" className={styles.label}>
           제목

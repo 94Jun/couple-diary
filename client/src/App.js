@@ -45,10 +45,8 @@ function App() {
         <Route path="/schedule/edit/:schedule_id" element={<EditSchedule />} />
         <Route path="/letter" element={<LetterPage />} />
         <Route path="/letter/add" element={<AddLetter />} />
-        <Route path="/memory" element={<MemoryPage />}>
-          <Route path="/memory" element={<Memories />} />
-          <Route path="/memory/photo" element={<Photos />} />
-        </Route>
+        <Route path="/memory" element={<Memories />} />
+        <Route path="/memory/photo" element={<Photos />} />
         <Route path="/memory/:memory_id" element={<MemoryView />} />
         <Route path="/memory/add" element={<AddMemory />} />
         <Route path="/mypage" element={<MyPage />} />

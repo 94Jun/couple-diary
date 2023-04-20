@@ -127,9 +127,9 @@ const getMemoriesById = (req, res) => {
 /** memoires 테이블의 memory_date 기준 내림차순 기준으로 memory_photos 테이블 100개 GET*/
 const getPhotosByCoupleId = (req, res) => {
   const { couple_id } = req.params;
-  const limit = 50;
+  const limit = 30;
   const { page } = req.query;
-  
+
   pool.getConnection((err, conn) => {
     if (err) {
       console.error("Connection Error", err);
@@ -159,14 +159,21 @@ const getPhotosByCoupleId = (req, res) => {
 
 /** memory_photos 테이블 count */
 const getPhotosLength = (req, res) => {
+  const { couple_id } = req.params;
   pool.getConnection((err, conn) => {
     if (err) {
       console.error("Connection Error", err);
       res.status(500).json({ message: "server error" });
       return;
     }
-    const sql = `SELECT COUNT(*) AS length FROM memory_photos`;
-    conn.query(sql, (err, rows, fields) => {
+    const sql = `
+    SELECT COUNT(*) AS length
+    FROM memories
+    JOIN memory_photos ON memories.memory_id = memory_photos.memory_id
+    WHERE memories.couple_id = ?;
+    `;
+    const params = [couple_id]
+    conn.query(sql, params, (err, rows, fields) => {
       if (err) {
         console.error("Query Error", err);
         res.status(500).json({ message: "query error" });
@@ -178,4 +185,26 @@ const getPhotosLength = (req, res) => {
   });
 };
 
-module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById, getPhotosByCoupleId, getPhotosLength };
+const deletePhotoById = (req, res) => {
+  const { photo_id } = req.params;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error(`server error`, err);
+      res.status(500).json({ message: "서버 에러" });
+      return;
+    }
+    const sql = `DELETE FROM memory_photos WHERE photo_id = ?`;
+    const params = [photo_id];
+    conn.query(sql, params, (err, result) => {
+      if (err) {
+        console.error(`Query error`, err);
+        res.status(500).json({ message: "쿼리 에러" });
+      } else {
+        res.status(200).json({ message: "삭제 완료" });
+      }
+    });
+    conn.release();
+  });
+};
+
+module.exports = { postMemoryByAdd, postMemory, postMemoryPhoto, postMemoryTag, getMemoriesById, getPhotosByCoupleId, getPhotosLength, deletePhotoById };

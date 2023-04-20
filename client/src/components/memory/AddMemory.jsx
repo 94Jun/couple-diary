@@ -102,7 +102,7 @@ const AddMemory = () => {
       setDate("");
       setPhotos([]);
       setTags([]);
-      navigate("/memory");
+      navigate(-1);
     } else {
       alert("본문이나 사진을 등록해주세요.");
     }
@@ -144,7 +144,7 @@ const AddMemory = () => {
         <label htmlFor="memoryContent">내용</label>
         <textarea id="memoryContent" value={content} onChange={handleContentChange}></textarea>
         <div className={styles.button_wrap}>
-          <CancelButton className={styles.cancel_btn} onClick={() => navigate("/memory")}>
+          <CancelButton className={styles.cancel_btn} onClick={() => navigate(-1)}>
             취소
           </CancelButton>
           <MainButton>추억 등록</MainButton>

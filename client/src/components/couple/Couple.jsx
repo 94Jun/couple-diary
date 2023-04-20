@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loading from "../shared/Loading";
 import SettingsIcon from "@mui/icons-material/Settings";
 import styles from "./Couple.module.css";
@@ -10,9 +10,11 @@ import useToggle from "../../hooks/useToggle";
 import CancelButton from "../shared/button/CancelButton";
 import MainButton from "../shared/button/MainButton";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
+import { modalActions } from "../../modules/modalSlice";
 
 const Couple = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [anniversaries, setAnniversaries] = useState();
   const [editMode, toggleEditMode] = useToggle(false);
@@ -121,7 +123,9 @@ const Couple = () => {
         </form>
         <div className={styles.disconnect_wrap}>
           <p>커플 연결 해제</p>
-          <CoupleDisconnect className={styles.disconnect} />
+          <MainButton onClick={() => dispatch(modalActions.OPEN_MODAL("disconnect"))} className={styles.disconnect}>
+            커플 연결 해제
+          </MainButton>
         </div>
       </div>
     );

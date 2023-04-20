@@ -5,7 +5,7 @@ import ScheduleCard from "./ScheduleCard";
 import AnniversaryCard from "../anniversary/AnniversaryCard";
 
 const CalendarSchedule = ({ selectedDate, anniversaries, schedules }) => {
-  const formattedDate = formatDate(new Date(selectedDate.toISOString())).slice(0, 11);
+  const formattedDate = formatDate(new Date(selectedDate.toISOString())).slice(0, 14);
   const dailyAnniversaries = anniversaries?.filter((ann) => {
     return new Date(ann.event_date).toDateString() === selectedDate.toDateString();
   });

@@ -56,7 +56,7 @@ const LetterCard = ({ letter, openLetterView, fetchData, editMode }) => {
         <p className={styles.nickname}>{letter.nickname}</p>
         <div className={styles.other_wrap}>
           <p className={styles.timestamp}>{timestamp}</p>
-          {view ? <p className={styles.view}>읽음</p> : <p className={styles.not_view}>읽지 않음</p>}
+          {userInfo.user_id !== letter.user_id ? view ? <p className={styles.view}>읽음</p> : <p className={styles.not_view}>읽지 않음</p> : null}
         </div>
       </div>
       {editMode && letter.user_id === userInfo.user_id && (
