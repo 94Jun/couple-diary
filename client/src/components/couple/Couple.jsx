@@ -21,7 +21,7 @@ const Couple = () => {
   const [profile, setProfile] = useState("");
   const [profileUrl, setProfileUrl] = useState("");
   const start = anniversaries?.find((ann) => ann.event_name === "시작") || null;
-  const startDate = formatDate(new Date(start?.event_date)).slice(0, 14) || null;
+  const startDate = start ? formatDate(new Date(start?.event_date)).slice(0, 14) : "등록 필요"
   const loginMaintenance = useLoginMaintenance();
 
   const getAnniversaries = async (couple_id) => {

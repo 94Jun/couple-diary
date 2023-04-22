@@ -2,8 +2,10 @@ import MainButton from "../shared/button/MainButton";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
+import { useNavigate } from "react-router-dom";
 
 const CoupleDisconnect = (props) => {
+  const navigate = useNavigate();
   const userInfo = useSelector((state) => state.login.userInfo);
   const loginMaintenance = useLoginMaintenance();
 
@@ -17,6 +19,7 @@ const CoupleDisconnect = (props) => {
     };
     await axios(config);
     await loginMaintenance();
+    navigate("/");
   };
   return (
     <div className={props.className}>

@@ -134,7 +134,7 @@ const Photos = () => {
   if (!isLoading) {
     content = (
       <div className={styles.container}>
-        <MemoryHeader toggleEditMode={toggleEditMode} editMode={editMode} setInitial={() => setSelectedPhotos([])} />
+        <MemoryHeader toggleEditMode={toggleEditMode} editMode={editMode} setInitial={() => setSelectedPhotos([])} isSetting={true} />
         <h3 className={styles.length}>{`${maxPhotoLength}개의 사진`}</h3>
         <div className={styles.img_container}>
           {photos &&

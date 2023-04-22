@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import AnniversaryPage from "./pages/AnniversaryPage";
 import SchedulePage from "./pages/SchedulePage";
 import LetterPage from "./pages/LetterPage";
-import MemoryPage from "./pages/MemoryPage";
 import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
 import useLoginMaintenance from "./hooks/useLoginMaintenance";
@@ -22,6 +21,7 @@ import MyPage from "./pages/MyPage";
 import ScheduleList from "./components/schedule/ScheduleList";
 import EditAnniversary from "./components/anniversary/EditAnniversary";
 import EditSchedule from "./components/schedule/EditSchedule";
+import EditMemory from "./components/memory/EditMemory";
 
 function App() {
   const activeModal = useSelector((state) => state.modal.activeModal);
@@ -49,6 +49,7 @@ function App() {
         <Route path="/memory/photo" element={<Photos />} />
         <Route path="/memory/:memory_id" element={<MemoryView />} />
         <Route path="/memory/add" element={<AddMemory />} />
+        <Route path="/memory/edit/:memory_id" element={<EditMemory />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/*" element={<Navigate to="/"></Navigate>} />
       </Routes>
