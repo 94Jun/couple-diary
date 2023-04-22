@@ -21,7 +21,7 @@ const Couple = () => {
   const [profile, setProfile] = useState("");
   const [profileUrl, setProfileUrl] = useState("");
   const start = anniversaries?.find((ann) => ann.event_name === "시작") || null;
-  const startDate = start ? formatDate(new Date(start?.event_date)).slice(0, 14) : "등록 필요"
+  const startDate = start ? formatDate(new Date(start?.event_date)).slice(0, 14) : "등록 필요";
   const loginMaintenance = useLoginMaintenance();
 
   const getAnniversaries = async (couple_id) => {
@@ -90,7 +90,7 @@ const Couple = () => {
   let content = <Loading />;
   if (!isLoading) {
     content = (
-      <div className={styles.container}>
+      <div className={`${styles.container} container`}>
         <div className={styles.header}>
           <h3 className={styles.title}>커플 정보</h3>
           <button className={styles.icon_wrap} onClick={toggleEditMode}>

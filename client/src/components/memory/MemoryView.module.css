@@ -1,56 +1,113 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 1000px;
+  margin : 0 auto;
+  padding : 20px 0;
+}
+.header {
+  padding: 0 20px;
+  margin-bottom : 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title{
+  font-size: 24px;
+}
+.date{
+  padding: 0 20px;
+  color : #777;
+  margin-bottom : 20px;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.date {
-  font-size: 1.1rem;
-  color: #777;
-  margin-bottom: 20px;
-}
-
-.image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-  overflow: hidden;
-  position: relative;
-}
-
-.image img {
+.carousel_main {
   width: 100%;
-  height: auto;
+  max-width: 500px;
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  border-top : 1px solid rgb(240, 240, 240);
+  border-bottom : 1px solid rgb(240, 240, 240);
+  background: rgb(248, 248, 248);
+}
+
+.carousel_sub {
+  width: 100%;
+  max-width: 500px;
+  height: 140px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  overflow: auto;
+  padding: 20px;
+  margin: 0 auto;
+  border-bottom : 1px solid rgb(240, 240, 240);
+}
+
+.main_wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.main_wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sub_wrap {
+  width: 100px;
+  height: 90%;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  overflow: hidden;
+}
+
+.selected {
+  border: 2px solid #60a5fa;
+}
+.sub_wrap img {
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
 }
 
-.tags {
+.edit_wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap : 16px;
+}
+
+.edit_wrap button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color : #444;
+  cursor: pointer;
+}
+
+.text{
+  padding : 0 20px;
+  margin-top : 20px;
+  line-height: 24px;
+}
+
+.tag_wrap {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  align-items: center;
+  gap: 12px;
+  padding : 0 20px;
+  margin-bottom : 20px;
 }
 
 .tag {
-  background-color: #f1f1f1;
-  padding: 5px 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-.content {
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 20px 10px;
-  }
+  background: linear-gradient(90deg, #fce7f3 0%, #dbeafe 100%);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 14px;
 }

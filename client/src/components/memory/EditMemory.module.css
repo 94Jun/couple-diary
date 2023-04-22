@@ -4,6 +4,8 @@
   align-items: center;
   width: 100%;
   padding: 20px 0;
+  max-width: 600px;
+  margin : 0 auto;
 }
 
 .title {
@@ -55,8 +57,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
-
 .add_photo_wrap {
   margin: 20px 0 10px 0;
   gap: 20px;
@@ -79,7 +81,7 @@
 }
 .preview_wrap img {
   width: 100%;
-  height: 100%;
+  height: 95%;
   object-fit: contain;
   border-radius: 10px;
 }

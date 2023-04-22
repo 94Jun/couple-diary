@@ -1,38 +1,52 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./MemoryView.module.css";
 import { formatDate } from "../../common";
 import Loading from "../shared/Loading";
-import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const MemoryView = () => {
   const { memory_id } = useParams();
   const navigate = useNavigate();
   const [memory, setMemory] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedPhoto, setSelectedPhoto] = useState();
   const date = memory?.memory_date !== "1899-11-29T15:32:08.000Z" ? formatDate(new Date(memory?.memory_date)).slice(0, 14) : null;
-  const photos = memory ? memory?.photos.sort((a, b) => (a.created_at >= b.created_at ? 1 : -1)) : null;
+  const photos = memory ? memory.photos?.sort((a, b) => (a.created_at >= b.created_at ? 1 : -1)) : null;
+  useEffect(() => {
+    if (photos) {
+      setSelectedPhoto(photos[0]);
+    }
+  }, [photos]);
 
-  const getMemoryByMemoryId = async (memory_id) => {
+  /** memories 테이블 GET */
+  const getMemoryById = async (memory_id) => {
     const config = {
       url: `/api/memory?type=memory&id=${memory_id}`,
       method: "GET",
     };
     const res = await axios(config);
     if (res.data.length > 0) {
-      setMemory(res.data[0]);
+      return res.data[0];
     } else {
       navigate("/memory");
+      return;
     }
+  };
+
+  const fetchMemory = async (memory_id) => {
+    const loadedMemory = await getMemoryById(memory_id);
+    setMemory(loadedMemory);
   };
 
   useEffect(() => {
     if (isLoading) {
-      getMemoryByMemoryId(memory_id);
+      fetchMemory(memory_id);
       setIsLoading(false);
     }
-  }, []);
+  }, [memory_id]);
 
   const deleteMemory = async (memory_id) => {
     const config = {
@@ -48,31 +62,58 @@ const MemoryView = () => {
   };
 
   let content = <Loading />;
+
   if (!isLoading && memory) {
     content = (
       <div className={styles.container}>
-        <h2 className={styles.title}>{memory.title}</h2>
-        <p className={styles.date}>{date}</p>
-        {memory.photos && (
-          <div className={styles.image}>
-            <img src={photos[0].photo_url} alt="Memory" />
+        <div className={styles.header}>
+          <h3 className={styles.title}>{memory.title !== "null" ? memory.title : "제목 없음"}</h3>
+          <div className={styles.edit_wrap}>
+            <button onClick={() => navigate(`/memory/edit/${memory_id}`)}>
+              <EditIcon fontSize="inherit" color="inherit" />
+            </button>
+            <button onClick={handleDeleteMemory}>
+              <DeleteIcon fontSize="inherit" color="inherit" />
+            </button>
+          </div>
+        </div>
+        <div className={styles.date}>{date}</div>
+        {memory.tags && (
+          <div className={styles.tag_wrap}>
+            {memory.tags.map((tag) => {
+              return (
+                <div key={tag.tag_id} className={styles.tag}>
+                  {tag.tag_name}
+                </div>
+              );
+            })}
           </div>
         )}
-        <div className={styles.tags}>
-          {memory.tags &&
-            memory.tags.map((tag) => (
-              <span key={tag.tag_id} className={styles.tag}>
-                {tag.tag_name}
-              </span>
-            ))}
-        </div>
-        <div className={styles.content}>{memory.content}</div>
-        <div className={styles.btn_wrap}>
-          <Link to={`/memory/edit/${memory_id}`}>
-            <button>수정</button>
-          </Link>
-          <button onClick={handleDeleteMemory}>삭제</button>
-        </div>
+        {photos && selectedPhoto && (
+          <div className={styles.carousel_wrap}>
+            <div className={styles.carousel_main}>
+              <div className={styles.main_wrap}>
+                <img src={selectedPhoto?.photo_url} alt="carousel_main" />
+              </div>
+            </div>
+            {photos.length > 1 && (
+              <div className={styles.carousel_sub}>
+                {photos.map((photo) => {
+                  return (
+                    <div
+                      key={photo.photo_id}
+                      className={`${styles.sub_wrap} ${photo.photo_id === selectedPhoto.photo_id ? styles.selected : ""}`}
+                      onClick={() => setSelectedPhoto(photo)}
+                    >
+                      <img src={photo.photo_url} alt="carousel_sub" />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+        <p className={styles.text}>{memory.content !== "null" && memory.content}</p>
       </div>
     );
   }

@@ -40,8 +40,8 @@ const AnniversaryCard = ({ anniversary, editMode, fetchData }) => {
       <div className={styles.main}>
         <div className={styles.event_name}>{event_name}</div>
         <div>
-          <div className={styles.event_date}>{formattedDate.slice(0, 14)}</div>
           <div className={styles.remaining_day}>{remainingDay}</div>
+          <div className={styles.event_date}>{formattedDate.slice(0, 14)}</div>
         </div>
       </div>
       {editMode && !anniversary.isAuto && (

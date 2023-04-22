@@ -54,40 +54,42 @@ const ScheduleList = () => {
   let content = <Loading />;
   if (!isLoading) {
     content = (
-      <div className={styles.container}>
+      <div className={`${styles.container} container`}>
         <div className={styles.header}>
           <LinkButton url="/schedule/add">일정 등록</LinkButton>
           <button className={styles.setting_icon} type="button" onClick={toggleEditMode}>
             <SettingsIcon fontSize="inherit" color="inherit" />
           </button>
         </div>
-        <div className={styles.schedule_wrap}>
-          <div className={styles.schedule_header}>
-            <h4>지난 일정</h4>
-            <div onClick={togglePreIsVisible}>
-              {preIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+        <div className={styles.main}>
+          <div className={styles.schedule_wrap}>
+            <div className={styles.schedule_header}>
+              <h4>지난 일정</h4>
+              <button className={styles.toggle_icon} onClick={togglePreIsVisible}>
+                {preIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+              </button>
             </div>
+            {preIsVisible &&
+              preSchedules &&
+              preSchedules.length > 0 &&
+              preSchedules.map((schedule, idx) => {
+                return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData} />;
+              })}
           </div>
-          {preIsVisible &&
-            preSchedules &&
-            preSchedules.length > 0 &&
-            preSchedules.map((schedule, idx) => {
-              return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData}/>;
-            })}
-        </div>
-        <div className={styles.schedule_wrap}>
-          <div className={styles.schedule_header}>
-            <h4>일정</h4>
-            <div onClick={toggleNextIsVisible}>
-              {nextIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+          <div className={styles.schedule_wrap}>
+            <div className={styles.schedule_header}>
+              <h4>일정</h4>
+              <button className={styles.toggle_icon} onClick={toggleNextIsVisible}>
+                {nextIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+              </button>
             </div>
+            {nextIsVisible &&
+              nextSchedules &&
+              nextSchedules.length > 0 &&
+              nextSchedules.map((schedule, idx) => {
+                return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData} />;
+              })}
           </div>
-          {nextIsVisible &&
-            nextSchedules &&
-            nextSchedules.length > 0 &&
-            nextSchedules.map((schedule, idx) => {
-              return <DailySchedule key={idx} schedules={schedule} editMode={editMode} fetchData={fetchData}/>;
-            })}
         </div>
       </div>
     );

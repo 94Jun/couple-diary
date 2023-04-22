@@ -13,6 +13,11 @@
   color : #666;
   background: none;
   border : none;
+  cursor: pointer;
+}
+.main{
+  max-width: 800px;
+  margin : 0 auto;
 }
 
 .schedule_wrap{
@@ -29,9 +34,13 @@
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
-.schedule_header > div{
+
+.toggle_icon{
+  border : none;
+  background: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  cursor: pointer;
 }

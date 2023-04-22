@@ -1,67 +1,52 @@
-.letter_card {
-  display: flex;
-  flex-direction: column;
-  background-color: #f4e8df;
-  border-radius: 10px;
+.female {
+  width: 250px;
+  aspect-ratio: 1/1;
+  background: url(https://couple-diary.s3.ap-northeast-2.amazonaws.com/assets/envelope_1.png) #fdf2f8;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px auto;
-  width: 80%;
-  max-height: 200px;
+  background-size: cover;
+  font-family: "EarlyFontDiary", sans-serif;
+  position: relative;
+  border-radius: 1em;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.card_content {
-  flex-grow: 1;
+.male {
+  width: 250px;
+  aspect-ratio: 1/1;
+  background: url(https://couple-diary.s3.ap-northeast-2.amazonaws.com/assets/envelope_2.png) #eff6ff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  font-family: "EarlyFontDiary", sans-serif;
+  position: relative;
+  border-radius: 1em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.date {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.view_band {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 50px;
+  background-color: #f3e8ff;
+  transform: rotate(-45deg) translate(-50px, -20px);
+  text-align: center;
   display: flex;
-  align-items: center;
-  font-family: 'EarlyFontDiary', sans-serif;
-}
-
-.card_content p {
-  font-size: 16px;
-}
-
-.card_footer {
-  margin-top : 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nickname {
-  font-weight: bold;
-}
-
-.timestamp {
-  font-size: 12px;
-  color: #777;
-}
-.view{
-  font-size: 12px;
-  color: #777;
-}
-.not_view{
-  font-size: 12px;
-  color : #3b82f6;
-}
-
-.other_wrap{
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap : 10px;
-}
-
-.edit_wrap {
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap : 16px;
-  margin-top : 10px;
-}
-.edit_wrap button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color : #444;
 }

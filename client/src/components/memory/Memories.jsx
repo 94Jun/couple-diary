@@ -97,12 +97,13 @@ const Memories = () => {
       }
     };
   }, [loadedRef, observer]);
-  
+
   let content = <Loading />;
   if (!isLoading) {
     content = (
-      <div className={styles.container}>
+      <div className={`${styles.container} container`}>
         <MemoryHeader isSetting={false} />
+        <h3 className={styles.length}>{memoryLength}개의 추억</h3>
         <div className={styles.card_container}>
           {memories &&
             memories.length > 0 &&

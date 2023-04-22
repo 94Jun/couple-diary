@@ -8,3 +8,6 @@
   cursor: pointer;
   border-radius: 5px;
 }
+.button:hover{
+  background: linear-gradient(90deg, #f472b6 0%, #60a5fa 100%);
+}

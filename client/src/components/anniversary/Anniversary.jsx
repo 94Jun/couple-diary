@@ -55,43 +55,45 @@ const Anniversary = () => {
 
   if (!isLoading) {
     content = (
-      <div className={styles.container}>
+      <div className={`${styles.container} container`}>
         <div className={styles.header}>
           <LinkButton url="/anniversary/add">기념일 등록</LinkButton>
           <button className={styles.setting_icon} type="button" onClick={toggleEditMode}>
             <SettingsIcon fontSize="inherit" color="inherit" />
           </button>
         </div>
-        <div className={styles.anniversary_wrap}>
-          <div className={styles.anniversary_header}>
-            <h4>지난 기념일</h4>
-            <div onClick={togglePreIsVisible}>
-              {preIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+        <div className={styles.main}>
+          <div className={styles.anniversary_wrap}>
+            <div className={styles.anniversary_header}>
+              <h4>지난 기념일</h4>
+              <button className={styles.toggle_icon} onClick={togglePreIsVisible}>
+                {preIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+              </button>
+            </div>
+            <div className={styles.card_wrap}>
+              {preIsVisible &&
+                pastAnniversaries &&
+                pastAnniversaries.length > 0 &&
+                pastAnniversaries.map((ann) => {
+                  return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
+                })}
             </div>
           </div>
-          <div className={styles.card_wrap}>
-            {preIsVisible &&
-              pastAnniversaries &&
-              pastAnniversaries.length > 0 &&
-              pastAnniversaries.map((ann) => {
-                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
-              })}
-          </div>
-        </div>
-        <div className={styles.anniversary_wrap}>
-          <div className={styles.anniversary_header}>
-            <h4>기념일</h4>
-            <div onClick={toggleNextIsVisible}>
-              {nextIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+          <div className={styles.anniversary_wrap}>
+            <div className={styles.anniversary_header}>
+              <h4>기념일</h4>
+              <button className={styles.toggle_icon} onClick={toggleNextIsVisible}>
+                {nextIsVisible ? <ArrowDropUpIcon fontSize="inherit" color="inherit" /> : <ArrowDropDownIcon fontSize="inherit" color="inherit" />}
+              </button>
             </div>
-          </div>
-          <div className={styles.card_wrap}>
-            {nextIsVisible &&
-              upcomingAnniversaries &&
-              upcomingAnniversaries.length > 0 &&
-              upcomingAnniversaries.map((ann) => {
-                return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
-              })}
+            <div className={styles.card_wrap}>
+              {nextIsVisible &&
+                upcomingAnniversaries &&
+                upcomingAnniversaries.length > 0 &&
+                upcomingAnniversaries.map((ann) => {
+                  return <AnniversaryCard key={ann.anniversary_id} anniversary={ann} editMode={editMode} fetchData={fetchData} />;
+                })}
+            </div>
           </div>
         </div>
       </div>

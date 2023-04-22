@@ -21,8 +21,12 @@
 }
 
 .remaining_day {
-  font-size: 14px;
-  color: #555;
+  margin-bottom : 5px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #fbcfe8 0%, #bfdbfe 100%);
+  border-radius: 5px;
+  text-align: center;
+  padding : 5px;
 }
 
 .edit_wrap {
@@ -37,4 +41,5 @@
   border: none;
   font-size: 20px;
   color : #444;
+  cursor: pointer;
 }

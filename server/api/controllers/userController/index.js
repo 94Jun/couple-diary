@@ -73,6 +73,29 @@ const getUserByCoupleCode = (req, res) => {
   });
 };
 
+/** user_id를 통한 유저 정보 확인 */
+const getUserById = (req, res) => {
+  const { user_id } = req.params;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error("Connection error", err);
+      res.status(500).json({ message: "서버 에러입니다." });
+      return;
+    }
+    const sql = `SELECT * FROM users WHERE user_id = ?`;
+    const params = [user_id];
+    conn.query(sql, params, (err, rows, fields) => {
+      if (err) {
+        console.error("Query error", err);
+        res.status(500).json({ message: "유저 정보를 불러오는데 실패했습니다." });
+      } else {
+        res.status(200).json(rows);
+      }
+    });
+    conn.release();
+  });
+};
+
 /** 신규 회원 등록 */
 const postUser = (req, res) => {
   pool.getConnection((err, conn) => {
@@ -160,4 +183,4 @@ const updateUser = (req, res) => {
   });
 };
 
-module.exports = { getUserByKakaoId, postUser, getUserByCoupleCode, updateUserByChangeCouple, updateUser };
+module.exports = { getUserByKakaoId, postUser, getUserByCoupleCode, updateUserByChangeCouple, updateUser, getUserById };

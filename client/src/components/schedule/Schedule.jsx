@@ -69,7 +69,7 @@ const Schedule = () => {
   let content = <Loading />;
   if (!isLoading) {
     content = (
-      <div>
+      <div className="container">
         <Calendar selectedDate={selectedDate} handleSelectedDate={handleSelectedDate} anniversaries={anniversarydates} schedules={schedules} />
         <CalendarSchedule anniversaries={updatedAnniversaries} selectedDate={selectedDate} schedules={schedules} />
       </div>

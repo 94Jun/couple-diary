@@ -7,6 +7,7 @@
   width: 100%;
   padding: 15px;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .image {
@@ -14,7 +15,7 @@
   padding-top: 100%;
   position: relative;
   margin-bottom: 15px;
-  border : 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 8px;
 }
 
@@ -25,32 +26,30 @@
   object-fit: cover;
   top: 0;
   left: 0;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .title {
   font-weight: bold;
   font-size: 18px;
-  min-height: 30px;
+  margin : 10px 0;
 }
 
 .date {
   color: #888;
   font-size: 14px;
   margin-bottom: 10px;
-  min-height: 20px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap : 12px;
-  min-height: 40px;
+  gap: 12px;
 }
 
 .tag {
-  background-color: #d6e6ec;
+  background: linear-gradient(90deg, #fce7f3 0%, #dbeafe 100%);
   border-radius: 4px;
   padding: 4px 12px;
   font-size: 14px;
@@ -60,12 +59,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap : 16px;
-  margin-top : 10px;
+  gap: 16px;
+  margin-top: 10px;
 }
 .edit_wrap button {
   background: none;
   border: none;
   font-size: 20px;
-  color : #444;
+  color: #444;
 }

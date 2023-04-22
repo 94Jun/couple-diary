@@ -23,7 +23,7 @@ const AddLetter = () => {
       data: { content, user_id: userInfo.user_id, couple_id: userInfo.couple_id, paper_style: paperStyle, font_style: fontStyle },
     };
     try {
-      const res = await axios(config);
+      await axios(config);
       navigate("/letter");
     } catch (error) {
       console.error("편지 등록에 실패했습니다.", error);
@@ -43,7 +43,9 @@ const AddLetter = () => {
     <div className={styles.write_letter_container}>
       <h2 className={styles.letter_title}>편지 쓰기</h2>
       <form className={styles.letter_form} onSubmit={handleSubmit}>
-        <textarea className={styles.letter_textarea} value={content} onChange={(event) => setContent(event.target.value)} placeholder="편지를 작성하세요." />
+        <div className={styles.text_wrap}>
+          <textarea className={styles.letter_textarea} value={content} onChange={(event) => setContent(event.target.value)} placeholder="편지를 작성하세요." />
+        </div>
         <div className={styles.button_wrap}>
           <CancelButton type="button" onClick={() => navigate(-1)}>
             취소

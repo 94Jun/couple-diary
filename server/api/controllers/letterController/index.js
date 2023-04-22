@@ -11,7 +11,7 @@ const getLettersByCoupleId = (req, res) => {
     }
     const { couple_id } = req.params;
     const sql = `
-    SELECT l.*, r.readers, u.nickname
+    SELECT l.*, r.readers, u.nickname, u.gender
     FROM letters l
     LEFT JOIN (
       SELECT letter_id, JSON_ARRAYAGG(JSON_OBJECT('read_id', read_id, 'user_id', user_id, 'read_at', read_at)) as readers

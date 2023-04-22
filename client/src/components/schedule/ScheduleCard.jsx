@@ -34,13 +34,13 @@ const ScheduleCard = ({ schedule, editMode, fetchData }) => {
           <span>{schedule?.schedule_time?.slice(0, 5)}</span>
           {schedule.content &&
             (showContent ? (
-              <span className={styles.toggle_icon_wrap} onClick={toggleContent}>
+              <button className={styles.toggle_icon_wrap} onClick={toggleContent}>
                 <ArrowDropUpIcon fontSize="inheirt" color="inherit" />
-              </span>
+              </button>
             ) : (
-              <span className={styles.toggle_icon_wrap} onClick={toggleContent}>
+              <button className={styles.toggle_icon_wrap} onClick={toggleContent}>
                 <ArrowDropDownIcon fontSize="inheirt" color="inherit" />
-              </span>
+              </button>
             ))}
         </div>
       </div>

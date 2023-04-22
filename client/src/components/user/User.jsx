@@ -74,7 +74,7 @@ const User = () => {
   let content = <Loading />;
   if (!isLoading) {
     content = (
-      <div className={styles.container}>
+      <div className={`${styles.container} container`}>
         <div className={styles.header}>
           <h3 className={styles.title}>나의 정보</h3>
           <button className={styles.icon_wrap} onClick={toggleEditMode}>

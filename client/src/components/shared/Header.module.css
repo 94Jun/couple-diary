@@ -6,6 +6,8 @@
   align-items: center;
   background-color: #fff;
   z-index: 100;
+  max-width: 1280px;
+  margin : 0 auto;
 }
 .icon_wrap{
   margin-right: 30px;

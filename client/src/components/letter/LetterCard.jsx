@@ -2,15 +2,21 @@ import styles from "./LetterCard.module.css";
 import { formatDate } from "../../common";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Loading from "../shared/Loading";
+import { useDispatch } from "react-redux";
+import { letterActions } from "../../modules/letterSlice";
+import { modalActions } from "../../modules/modalSlice";
 
-const LetterCard = ({ letter, openLetterView, fetchData, editMode }) => {
-  const timestamp = formatDate(new Date(letter.created_at));
+const LetterCard = ({ letter, fetchData }) => {
+  const dispatch = useDispatch();
+  const formattedDate = formatDate(new Date(letter.created_at)).slice(0, 14);
   const userInfo = useSelector((state) => state.login.userInfo);
   const { readers } = letter;
   const view = readers && readers.find((reader) => reader?.user_id === userInfo.user_id);
-
-  let contentPreview = letter.content.slice(0, 100);
+  let dear = letter.user_id === userInfo.user_id ? userInfo.couple_user_info.nickname : userInfo.nickname;
+  if (dear.length > 5) {
+    dear = dear.slice(0, 5) + "..";
+  }
 
   /** 편지 클릭에 따른 letter_readers 테이블 POST */
   const postLetterReader = async (letter_id) => {
@@ -27,47 +33,29 @@ const LetterCard = ({ letter, openLetterView, fetchData, editMode }) => {
     }
   };
 
-  const openLetterModal = async () => {
-    openLetterView(letter);
+  const handleLetterModal = async () => {
     if (!view) {
       await postLetterReader(letter.letter_id);
       await fetchData(userInfo.couple_id);
     }
+    dispatch(letterActions.SELECT_LETTER(letter));
+    dispatch(modalActions.OPEN_MODAL("letter"));
   };
 
-  const deleteLetter = async () => {
-    const config = {
-      url: `/api/letter/${letter.letter_id}`,
-      method: "DELETE",
-    };
-    await axios(config);
-    await fetchData(userInfo.couple_id);
-  };
+  let element = <Loading />;
+  if (userInfo && letter) {
+    element = (
+      <div className={`${letter.gender === "남" ? styles.male : styles.female}`} onClick={handleLetterModal}>
+        <div className={styles.header}>
+          <p className={styles.dear}>dear {dear}</p>
+          <p className={styles.date}>{formattedDate}</p>
+        </div>
+        {!view && letter.user_id !== userInfo.user_id && <div className={styles.view_band}>새로운 편지</div>}
+      </div>
+    );
+  }
 
-  return (
-    <div className={styles.letter_card}>
-      <div className={styles.card_content} onClick={openLetterModal}>
-        <p>
-          {contentPreview}
-          {contentPreview.length === 100 && "..."}
-        </p>
-      </div>
-      <div className={styles.card_footer} onClick={openLetterModal}>
-        <p className={styles.nickname}>{letter.nickname}</p>
-        <div className={styles.other_wrap}>
-          <p className={styles.timestamp}>{timestamp}</p>
-          {userInfo.user_id !== letter.user_id ? view ? <p className={styles.view}>읽음</p> : <p className={styles.not_view}>읽지 않음</p> : null}
-        </div>
-      </div>
-      {editMode && letter.user_id === userInfo.user_id && (
-        <div className={styles.edit_wrap}>
-          <button onClick={deleteLetter}>
-            <DeleteIcon fontSize="inherit" color="inherit" />
-          </button>
-        </div>
-      )}
-    </div>
-  );
+  return element;
 };
 
 export default LetterCard;
