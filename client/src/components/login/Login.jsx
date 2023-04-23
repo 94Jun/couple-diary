@@ -8,7 +8,7 @@ const Login = () => {
       <h2 className={styles.login_title}>로그인</h2>
       <p className={styles.login_description}>오직 당신들만의 소중한 추억을 저장하세요!</p>
       <a href={KAKAO_LOGIN_LINK}>
-        <img src="/images/kakao_login_medium_wide.png" alt="Kakao Login" />
+        <img src="https://couple-diary.s3.ap-northeast-2.amazonaws.com/assets/kakao_login_medium_wide.png" alt="Kakao Login" />
       </a>
     </div>
   );

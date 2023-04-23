@@ -7,10 +7,12 @@ import { modalActions } from "../../modules/modalSlice";
 const Header = () => {
   const dispatch = useDispatch();
   return (
-    <div className={styles.container}>
-      <Title />
-      <div className={styles.icon_wrap} onClick={() => dispatch(modalActions.OPEN_MODAL("menu"))}>
-        <MenuIcon color="inherit" fontSize="inherit" />
+    <div className={styles.top_container}>
+      <div className={styles.container}>
+        <Title />
+        <div className={styles.icon_wrap} onClick={() => dispatch(modalActions.OPEN_MODAL("menu"))}>
+          <MenuIcon color="inherit" fontSize="inherit" />
+        </div>
       </div>
     </div>
   );

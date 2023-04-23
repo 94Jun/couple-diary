@@ -39,7 +39,7 @@ const AddAdditionalAnniversary = ({ dateParams }) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>기념일 추가</h2>
+      <h2 className={styles.title}>기념일 등록</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="eventName">이름</label>
         <input type="text" id="eventName" value={eventName} onChange={(e)=>setEventName(e.target.value)} required />
@@ -49,7 +49,7 @@ const AddAdditionalAnniversary = ({ dateParams }) => {
           <CancelButton type="button" onClick={() => navigate(-1)}>
             취소
           </CancelButton>
-          <MainButton type="submit">기념일 추가</MainButton>
+          <MainButton type="submit">기념일 등록</MainButton>
         </div>
       </form>
     </div>

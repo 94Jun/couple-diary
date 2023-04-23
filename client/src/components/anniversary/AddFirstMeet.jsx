@@ -53,7 +53,7 @@ const AddFirstMeet = ({ dateParams }) => {
           <CancelButton type="button" onClick={() => navigate(-1)}>
             취소
           </CancelButton>
-          <MainButton className={styles.submitBtn}>기념일 추가</MainButton>
+          <MainButton className={styles.submitBtn}>기념일 등록</MainButton>
         </div>
       </form>
     </div>

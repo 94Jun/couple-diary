@@ -1,6 +1,12 @@
-.container{
+.top_container{
+  background-color: #fff;
+  z-index: 99;
   position: sticky;
   top : 0;
+  width: 100%;
+  margin : 0 auto;
+}
+.container{
   display: flex;
   justify-content: space-between;
   align-items: center;

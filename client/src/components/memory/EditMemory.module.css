@@ -78,6 +78,7 @@
   width: 100px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  cursor: pointer;
 }
 .preview_wrap img {
   width: 100%;

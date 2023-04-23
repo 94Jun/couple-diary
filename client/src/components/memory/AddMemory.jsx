@@ -102,7 +102,7 @@ const AddMemory = () => {
       setDate("");
       setPhotos([]);
       setTags([]);
-      navigate("/memory");
+      navigate("/");
     } else {
       alert("본문이나 사진을 등록해주세요.");
     }

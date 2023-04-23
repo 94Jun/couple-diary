@@ -1,12 +1,14 @@
 export const formatDate = (date) => {
-  const weeksOfDay = ["일", "월", "화", "수", "목", "금", "토"];
-  const year = date.getFullYear().toString().slice(2);
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  const week = weeksOfDay[date.getDay()];
-  const hour = (date.getHours() + 9).toString().padStart(2, "0");
-  const minute = date.getMinutes().toString().padStart(2, "0");
-  return `${year}. ${month}. ${day}.(${week}) ${hour}:${minute}`;
+  if(date){
+    const weeksOfDay = ["일", "월", "화", "수", "목", "금", "토"];
+    const year = date.getFullYear().toString().slice(2);
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const week = weeksOfDay[date.getDay()];
+    const hour = (date.getHours() + 9).toString().padStart(2, "0");
+    const minute = date.getMinutes().toString().padStart(2, "0");
+    return `${year}. ${month}. ${day}.(${week}) ${hour}:${minute}`;
+  }
 };
 
 /** 사귄 날짜에 따라 자동으로 기념일 생성해주는 함수(100일, 200일, 300일, 1주년, 2주년 +) */
@@ -77,5 +79,24 @@ export const divideSchedule = (schedules) => {
     return updatedSchedule;
   } else {
     return;
+  }
+};
+
+export const calcRemainingDay = (date) => {
+  if (date) {
+    const today = new Date();
+    const targetDate = new Date(date);
+    const remainingDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+    let remainingDay;
+    if (remainingDays === 0) {
+      remainingDay = `D-Day`;
+    }
+    if (remainingDays > 0) {
+      remainingDay = `D-${remainingDays}`;
+    }
+    if (remainingDays < 0) {
+      remainingDay = `D+${-remainingDays}`;
+    }
+    return remainingDay;
   }
 };
