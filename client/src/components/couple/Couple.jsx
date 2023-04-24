@@ -87,8 +87,11 @@ const Couple = () => {
     }
   };
 
-  let content = <Loading />;
-  if (!isLoading) {
+  let content;
+  if (isLoading) {
+    content = <Loading />;
+  }
+  if (!isLoading && userInfo.is_couple) {
     content = (
       <div className={`${styles.container} container`}>
         <div className={styles.header}>
@@ -111,7 +114,7 @@ const Couple = () => {
             )}
           </div>
           <label htmlFor="other_name">상대방 이름</label>
-          <input type="text" id="other_name" value={userInfo.couple_user_info.nickname} disabled />
+          <input type="text" id="other_name" value={userInfo?.couple_user_info?.nickname} disabled />
           <label htmlFor="first_meet">시작일</label>
           <input type="text" id="first_meet" value={startDate} disabled />
           {editMode && (

@@ -86,25 +86,29 @@ const AddMemory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validation) {
-      const data = {
-        couple_id: userInfo.couple_id,
-        user_id: userInfo.user_id,
-        title: title ? title : null,
-        content: content ? content : null,
-        memory_date: date ? date : null,
-        photos,
-        tags,
-      };
-      await postMemoryByAdd(data);
-      setTitle("");
-      setContent("");
-      setDate("");
-      setPhotos([]);
-      setTags([]);
-      navigate("/");
+    if (userInfo.is_couple) {
+      if (validation) {
+        const data = {
+          couple_id: userInfo.couple_id,
+          user_id: userInfo.user_id,
+          title: title ? title : null,
+          content: content ? content : null,
+          memory_date: date ? date : null,
+          photos,
+          tags,
+        };
+        await postMemoryByAdd(data);
+        setTitle("");
+        setContent("");
+        setDate("");
+        setPhotos([]);
+        setTags([]);
+        navigate("/");
+      } else {
+        alert("본문이나 사진을 등록해주세요.");
+      }
     } else {
-      alert("본문이나 사진을 등록해주세요.");
+      alert("커플 등록이 필요합니다.");
     }
   };
 

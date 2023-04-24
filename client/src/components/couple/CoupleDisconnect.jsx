@@ -1,11 +1,13 @@
 import MainButton from "../shared/button/MainButton";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useLoginMaintenance from "../../hooks/useLoginMaintenance";
 import { useNavigate } from "react-router-dom";
+import { modalActions } from "../../modules/modalSlice";
 
 const CoupleDisconnect = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.login.userInfo);
   const loginMaintenance = useLoginMaintenance();
 
@@ -19,6 +21,7 @@ const CoupleDisconnect = (props) => {
     };
     await axios(config);
     await loginMaintenance();
+    dispatch(modalActions.CLOSE_MODAL());
     navigate("/");
   };
   return (

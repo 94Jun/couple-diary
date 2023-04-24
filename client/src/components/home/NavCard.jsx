@@ -5,7 +5,7 @@ import ScheduleLink from "./ScheduleLink";
 
 const NavCard = ({ anniversary, schedules, letters }) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} container`}>
       <ScheduleLink schedules={schedules} />
       <AnniversaryLink anniversary={anniversary} />
       <LetterLink letters={letters} />

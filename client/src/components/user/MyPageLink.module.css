@@ -1,0 +1,20 @@
+.container{
+  margin-top : 16px;
+}
+.link {
+  margin-top : 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.link_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  background-color: #eff6ff;
+  font-size: 20px;
+}

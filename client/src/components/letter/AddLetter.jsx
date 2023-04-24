@@ -33,9 +33,13 @@ const AddLetter = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (content.trim().length > 0) {
-      await postLetter();
-      setContent("");
+    if (userInfo.is_couple) {
+      if (content.trim().length > 0) {
+        await postLetter();
+        setContent("");
+      }
+    } else {
+      alert("커플 등록이 필요합니다.");
     }
   };
 

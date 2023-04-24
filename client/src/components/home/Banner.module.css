@@ -1,4 +1,4 @@
-.container{
+.container {
   background: #fdf2f8;
 }
 
@@ -14,12 +14,12 @@
   position: relative;
   font-family: "KyoboHandwriting2021sjy";
   min-width: 280px;
-  margin : 0 auto;
+  margin: 0 auto;
 }
 
 .profile {
   width: 25%;
-  aspect-ratio : 1/1;
+  aspect-ratio: 1/1;
   max-width: 200px;
   position: absolute;
   top: 10%;
@@ -46,31 +46,51 @@
   padding: 5px 0;
   min-width: 120px;
 }
+.day > a{
+  font-size : calc(3vmin + 10px);
+}
+.register {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: calc(4vmin + 10px);
+  border-radius: 10px;
+  padding: 5px 0;
+  min-width: 120px;
+}
+.register button{
+  font: inherit;
+}
 
 .name {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap : 2px;
-  top : 10%;
+  gap: 2px;
+  top: 10%;
   width: 55%;
-  right : 0;
+  right: 0;
   font-size: calc(2.5vmin + 10px);
   min-width: 120px;
 }
 
-.heart_icon{
+.heart_icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  color : tomato;
+  color: tomato;
 }
 
-.start_date{
+.start_date {
   position: absolute;
-  bottom : 10%;
-  right : 0;
+  bottom: 10%;
+  right: 0;
   width: 55%;
   display: flex;
   justify-content: center;

@@ -17,24 +17,28 @@ const AddSchedule = () => {
 
   const handlePostSchedule = async (e) => {
     e.preventDefault();
-    const config = {
-      url: "/api/schedule",
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      data: {
-        couple_id: userInfo.couple_id,
-        user_id: userInfo.user_id,
-        title,
-        content,
-        schedule_date: date,
-        schedule_time: time,
-      },
-    };
-    try {
-      await axios(config);
-      navigate("/schedule");
-    } catch (error) {
-      console.log(error);
+    if (userInfo.is_couple) {
+      const config = {
+        url: "/api/schedule",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        data: {
+          couple_id: userInfo.couple_id,
+          user_id: userInfo.user_id,
+          title,
+          content,
+          schedule_date: date,
+          schedule_time: time,
+        },
+      };
+      try {
+        await axios(config);
+        navigate("/schedule");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("커플 등록이 필요합니다.");
     }
   };
 

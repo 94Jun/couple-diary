@@ -17,23 +17,27 @@ const AddFirstMeet = ({ dateParams }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (date) {
-      const data = {
-        couple_id: userInfo.couple_id,
-        event_name: "시작",
-        event_date: new Date(date).toISOString(),
-      };
-      const config = {
-        url: "/api/anniversary",
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        data: data,
-      };
-      await axios(config);
-      setDate("");
-      navigate("/");
+    if (userInfo.is_couple) {
+      if (date) {
+        const data = {
+          couple_id: userInfo.couple_id,
+          event_name: "시작",
+          event_date: new Date(date).toISOString(),
+        };
+        const config = {
+          url: "/api/anniversary",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          data: data,
+        };
+        await axios(config);
+        setDate("");
+        navigate("/");
+      } else {
+        alert("날짜를 입력해주세요.");
+      }
     } else {
-      alert("날짜를 입력해주세요.");
+      alert("커플 등록이 필요합니다.");
     }
   };
 

@@ -22,15 +22,18 @@ import ScheduleList from "./components/schedule/ScheduleList";
 import EditAnniversary from "./components/anniversary/EditAnniversary";
 import EditSchedule from "./components/schedule/EditSchedule";
 import EditMemory from "./components/memory/EditMemory";
+import RequireLoginPage from "./pages/RequireLoginPage";
 
 function App() {
   const activeModal = useSelector((state) => state.modal.activeModal);
+  const isLogin = useSelector((state) => state.login.isLogin);
   const loginMaintenance = useLoginMaintenance();
   useEffect(() => {
     loginMaintenance();
   }, []);
-  return (
-    <div className="App">
+
+  let element = (
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -53,8 +56,15 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/*" element={<Navigate to="/"></Navigate>} />
       </Routes>
-      <Footer />
       {activeModal && <Modal />}
+    </>
+  );
+  if (isLogin === false) {
+    element = <RequireLoginPage />;
+  }
+  return (
+    <div className="App">
+      {element}
     </div>
   );
 }

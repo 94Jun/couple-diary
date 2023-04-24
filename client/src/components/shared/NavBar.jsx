@@ -5,6 +5,7 @@ import MainButton from "./button/MainButton";
 import CloseIcon from "@mui/icons-material/Close";
 import CoupleInfo from "../couple/CoupleInfo";
 import { Link } from "react-router-dom";
+import MyPageLink from "../user/MyPageLink";
 
 const navs = [
   {
@@ -43,13 +44,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.login.userInfo);
 
-  let headerContent = <MainButton onClick={() => dispatch(modalActions.OPEN_MODAL("login"))}>로그인</MainButton>;
-  if (userInfo) {
-    if (userInfo.is_couple) {
-      headerContent = <CoupleInfo userInfo={userInfo} />;
-    } else {
-      headerContent = <MainButton onClick={() => dispatch(modalActions.OPEN_MODAL("register"))}>커플 등록</MainButton>;
-    }
+  let headerContent = <MainButton onClick={() => dispatch(modalActions.OPEN_MODAL("register"))}>커플 등록</MainButton>;
+  if (userInfo.is_couple) {
+    headerContent = <CoupleInfo userInfo={userInfo} />;
   }
 
   return (
@@ -58,7 +55,10 @@ const NavBar = () => {
         <button className={styles.close_btn} onClick={() => dispatch(modalActions.CLOSE_MODAL())}>
           <CloseIcon fontSize="inherit" />
         </button>
-        {headerContent}
+        <div>
+          {headerContent}
+          <MyPageLink />
+        </div>
       </div>
       <nav className={styles.nav}>
         <ul>

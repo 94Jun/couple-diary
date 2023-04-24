@@ -85,7 +85,7 @@ const Home = () => {
 
   let content = <Loading />;
   if (!isLoading) {
-    if (userInfo.couple_id) {
+    if (userInfo) {
       content = (
         <div>
           <Banner userInfo={userInfo} start={start} />
