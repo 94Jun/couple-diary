@@ -33,8 +33,7 @@ const EditAnniversary = () => {
     if (loadedAnniversary) {
       setAnniversary(loadedAnniversary);
       const { event_date } = loadedAnniversary;
-      const date = new Date(event_date.slice(0, 4), Number(event_date.slice(5, 7) - 1), Number(event_date.slice(8, 10)) + 1, 9).toISOString().slice(0, 10);
-      setEventDate(date);
+      setEventDate(event_date.slice(0,10));
       setEventName(loadedAnniversary.event_name);
     } else {
       return;

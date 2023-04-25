@@ -38,10 +38,7 @@ const EditSchedule = () => {
       setContent(loadedSchedule.content);
       setTime(loadedSchedule.schedule_time);
       const { schedule_date } = loadedSchedule;
-      const date = new Date(schedule_date.slice(0, 4), Number(schedule_date.slice(5, 7) - 1), Number(schedule_date.slice(8, 10)) + 1, 9)
-        .toISOString()
-        .slice(0, 10);
-      setDate(date);
+      setDate(schedule_date.slice(0, 10));
     } else {
       return;
     }

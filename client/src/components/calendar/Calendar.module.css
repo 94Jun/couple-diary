@@ -60,6 +60,7 @@
   vertical-align: top;
   padding: 10px 0 0 0;
 }
+
 .date_wrap {
   display: flex;
   flex-direction: column;
@@ -91,7 +92,7 @@
 .schedule_wrap {
   display: flex;
   flex-wrap: wrap;
-  min-width: 50px;
+  min-width: 35px;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
@@ -111,4 +112,19 @@
   justify-content: center;
   align-items: center;
   color : #93C5FD;
+}
+@media (max-width : 300px){
+  .header_title h3 {
+    font-size: 18px;
+  }
+  .header_title img {
+    width: 40px;
+    height: 40px;
+  }
+  .btn_wrap {
+    gap: 5px;
+  }
+  .btn_wrap button {
+    font-size: 14px;
+  }
 }

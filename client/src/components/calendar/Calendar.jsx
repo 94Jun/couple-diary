@@ -129,8 +129,9 @@ const Calendar = ({ handleSelectedDate, selectedDate, anniversaries, schedules }
                   const isThisMonth = date.fullDate.getMonth() === selectedMonth;
                   const selected = selectedDate?.toDateString() === date.fullDate.toDateString();
                   const isWeekend = date.isWeekend();
-                  const isAnniversary = anniversaries?.find((ann) => ann.toString() === date.fullDate.toString()) ? true : false;
-                  const isSchedule = schedules?.find((schedule) => schedule.schedule_date === date.fullDate.toISOString()) ? true : false;
+                  const isAnniversary = anniversaries?.find((ann) => new Date(ann).toDateString() === date.fullDate.toDateString()) ? true : false;
+                  const isSchedule = schedules?.find((schedule) => new Date(schedule.schedule_date).toDateString() === date.fullDate.toDateString()) ? true : false;
+                  console.log(isAnniversary)
                   return (
                     <td key={date.date} onClick={() => handleSelectedDate(date.fullDate)} className={`${styles.td} ${selected ? styles.selected : ""}`}>
                       <div className={styles.date_wrap}>
