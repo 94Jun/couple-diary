@@ -9,7 +9,6 @@ const Banner = ({ userInfo, start }) => {
   const today = new Date();
   const startDate = new Date(start?.event_date);
   const pastDay = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
-
   let element;
   if (userInfo.is_couple && start) {
     element = (

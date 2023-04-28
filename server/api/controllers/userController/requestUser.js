@@ -32,7 +32,7 @@ const createMembership = async (userInfo) => {
     const { profile, email, age_range, birthday, birthday_type, gender } = kakao_account;
     const { nickname } = profile;
     const user_id = generateRandomId("user");
-    const couple_code = generateRandomId("code").slice(5, 11);
+    const couple_code = Math.random().slice(2, 8);
     const data = { user_id, kakao_id: id, nickname, age_range, birthday, birthday_type, email, gender, connected_at, couple_code, is_couple: false };
     const postMemberConfig = {
       url: `${process.env.SERVER_URL}/api/user`,

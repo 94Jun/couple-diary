@@ -9,7 +9,7 @@ import { modalActions } from "../../modules/modalSlice";
 
 const LetterCard = ({ letter, fetchData }) => {
   const dispatch = useDispatch();
-  const formattedDate = formatDate(new Date(letter.created_at)).slice(0, 14);
+  const formattedDate = new Date(letter.created_at).toLocaleDateString("ko-KR", { timeZone: "UTC" });
   const userInfo = useSelector((state) => state.login.userInfo);
   const { readers } = letter;
   const view = readers && readers.find((reader) => reader?.user_id === userInfo.user_id);

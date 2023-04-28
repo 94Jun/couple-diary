@@ -4,14 +4,12 @@ import MemoryCard from "./MemoryCard";
 import styles from "./Memories.module.css";
 import { useSelector } from "react-redux";
 import Loading from "../shared/Loading";
-import useToggle from "../../hooks/useToggle";
 import MemoryHeader from "./MemoryHeader";
 
 const Memories = () => {
   const userInfo = useSelector((state) => state.login.userInfo);
   const [memories, setMemories] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedMemories, setSelectedMemories] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [memoryPage, setMemoryPage] = useState(1);
   const [memoryLength, setMemoryLength] = useState();
@@ -23,8 +21,12 @@ const Memories = () => {
       url: `/api/memory?type=couple&id=${couple_id}&page=${page}`,
       method: "GET",
     };
-    const res = await axios(config);
-    return res.data;
+    try {
+      const res = await axios(config);
+      return res.data;
+    } catch (error) {
+      return [];
+    }
   };
 
   /** couple_id로 memories 테이블 Length GET */
@@ -33,8 +35,12 @@ const Memories = () => {
       url: `/api/memory/length/${couple_id}`,
       method: "GET",
     };
-    const res = await axios(config);
-    return res.data[0].length;
+    try {
+      const res = await axios(config);
+      return res.data[0].length;
+    } catch (error) {
+      return 0;
+    }
   };
 
   /** memory length setState */
@@ -51,8 +57,12 @@ const Memories = () => {
 
   /** fetch data and end loading */
   const fetchFirstData = async (couple_id, page) => {
-    await fetchFirstMemories(couple_id, page);
-    await fetchMemoryLength(couple_id);
+    if (couple_id) {
+      await fetchFirstMemories(couple_id, page);
+      await fetchMemoryLength(couple_id);
+    } else {
+      setMemoryLength(0);
+    }
     setIsLoading(false);
   };
 

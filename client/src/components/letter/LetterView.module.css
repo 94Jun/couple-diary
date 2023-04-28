@@ -26,6 +26,7 @@
 .content {
   line-height: 24px;
   letter-spacing: 2px;
+  white-space: pre-line;
 }
 
 .date {

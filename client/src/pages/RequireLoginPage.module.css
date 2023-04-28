@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height:calc(var(--vh, 1vh) * 100);
   width: 100%;
   position: relative;
   background: url("https://couple-diary.s3.ap-northeast-2.amazonaws.com/assets/login_background_1.jpg") #fff;

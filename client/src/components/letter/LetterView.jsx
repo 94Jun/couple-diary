@@ -1,5 +1,4 @@
 import styles from "./LetterView.module.css";
-import { formatDate } from "../../common";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../shared/Loading";
 import CancelButton from "../shared/button/CancelButton";
@@ -7,12 +6,15 @@ import { modalActions } from "../../modules/modalSlice";
 import { letterActions } from "../../modules/letterSlice";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import MainButton from "../shared/button/MainButton";
+import { useNavigate } from "react-router-dom";
 
 const LetterView = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const selectedLetter = useSelector((state) => state.letter.selectedLetter);
   const userInfo = useSelector((state) => state.login.userInfo);
-  const formattedDate = selectedLetter ? formatDate(new Date(selectedLetter.created_at)) : null;
+  const formattedDate = selectedLetter ? new Date(selectedLetter.created_at).toLocaleString("ko-KR", { timeZone: "UTC" }).slice(0, -3) : null;
   const [style, setStyle] = useState();
 
   /** 취소 클릭 handler */
@@ -50,6 +52,11 @@ const LetterView = () => {
     }
   };
 
+  const handleReply = () => {
+    dispatch(modalActions.CLOSE_MODAL());
+    navigate("/letter/add");
+  };
+
   let element = <Loading />;
   if (selectedLetter) {
     element = (
@@ -63,10 +70,12 @@ const LetterView = () => {
             <p className={styles.writer}>{selectedLetter.nickname}</p>
             <div className={styles.btn_wrap}>
               <CancelButton onClick={handleCancelModal}>닫기</CancelButton>
-              {selectedLetter.user_id === userInfo.user_id && (
+              {selectedLetter.user_id === userInfo.user_id ? (
                 <button className={styles.delete_btn} onClick={handleDelete}>
                   편지 삭제
                 </button>
+              ) : (
+                <MainButton onClick={handleReply}>답장하기</MainButton>
               )}
             </div>
           </div>

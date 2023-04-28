@@ -5,7 +5,7 @@
   width: 60%;
   max-width: 500px;
   min-width: 200px;
-  height: 100vh;
+  height:calc(var(--vh, 1vh) * 100);
   background-color: #fff;
   overflow: auto;
   animation-name: slide;
@@ -43,13 +43,12 @@
 }
 
 .nav {
-  padding: 20px 40px;
-  padding-top: 40px;
-  margin-bottom: 20px;
+  padding: 10px 40px;
+  padding-top: 30px;
 }
 .nav_wrap {
   text-align: right;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .nav_title {
   color: #666;

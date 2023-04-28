@@ -28,8 +28,17 @@ function App() {
   const activeModal = useSelector((state) => state.modal.activeModal);
   const isLogin = useSelector((state) => state.login.isLogin);
   const loginMaintenance = useLoginMaintenance();
+  const setScreenSize = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
   useEffect(() => {
     loginMaintenance();
+    setScreenSize();
+    window.addEventListener("resize", setScreenSize);
+    return () => {
+      window.removeEventListener("resize", setScreenSize);
+    };
   }, []);
 
   let element = (
@@ -62,11 +71,7 @@ function App() {
   if (isLogin === false) {
     element = <RequireLoginPage />;
   }
-  return (
-    <div className="App">
-      {element}
-    </div>
-  );
+  return <div className="App">{element}</div>;
 }
 
 export default App;
